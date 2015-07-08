@@ -166,3 +166,11 @@
 [url "git://gist.github.com/"]
 
 	insteadOf = "gist:"
+
+[user]
+
+	name = Travis Fischer
+	email = fisch0920@gmail.com
+[credential]
+
+	helper = osxkeychain
