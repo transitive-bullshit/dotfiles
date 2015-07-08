@@ -1,8 +1,14 @@
 # Easier navigation: .., ..., ...., ....., ~ and -
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias .....="cd ../../../.."
+alias ..='cd ..;ls'
+alias ...='cd ../..;ls'
+alias ....='cd ../../..;ls'
+alias .....='cd ../../../..;ls'
+alias ......='cd ../../../../..;ls'
+alias .......='cd ../../../../../..;ls'
+alias ........='cd ../../../../../../..;ls'
+alias .........='cd ../../../../../../../..;ls'
+alias ..........='cd ../../../../../../../../..;ls'
+
 alias ~="cd ~" # `cd` is probably faster to type though
 alias -- -="cd -"
 
@@ -11,9 +17,7 @@ alias d="cd ~/Documents/Dropbox"
 alias dl="cd ~/Downloads"
 alias dt="cd ~/Desktop"
 alias p="cd ~/projects"
-alias g="git"
-alias h="history"
-alias j="jobs"
+alias g='grep -RI'
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
@@ -139,3 +143,16 @@ alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resource
 
 # Reload the shell (i.e. invoke as a login shell)
 alias reload="exec $SHELL -l"
+
+# fisch0920
+alias tree='tree -CF'
+alias c='clear'
+alias :e='vi'
+
+alias h='heroku'
+alias hcp='heroku config:pull --overwrite'
+
+alias gs='git status'
+alias gp='git commit -am "." && git push'
+
+alias kc='ps -e | grep "python.*crawler" | grep -v grep | sed "s/^ *\([0-9]*\).*/\1/" | xargs kill -9'
