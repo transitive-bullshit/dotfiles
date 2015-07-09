@@ -1,440 +1,692 @@
-" windows-specific settings
-set gfn=Courier\ New:h12:b:cANSI
-"source $VIMRUNTIME/mswin.vim
-"behave mswin
+" (zR opens all folds)
 
-"set guioptions=em
-"set showtabline=2
-set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
-set laststatus=2
+" Header {
+" vim: set sw=4 ts=4 sts=4 et tw=78 foldmarker={,} foldlevel=0 foldmethod=marker spell:
+"
+"   /$$$$$$$$ /$$$$$$  /$$$$$$   /$$$$$$  /$$   /$$       /$$    /$$ /$$$$$$ /$$      /$$
+"  | $$_____/|_  $$_/ /$$__  $$ /$$__  $$| $$  | $$      | $$   | $$|_  $$_/| $$$    /$$$
+"  | $$        | $$  | $$  \__/| $$  \__/| $$  | $$      | $$   | $$  | $$  | $$$$  /$$$$
+"  | $$$$$     | $$  |  $$$$$$ | $$      | $$$$$$$$      |  $$ / $$/  | $$  | $$ $$/$$ $$
+"  | $$__/     | $$   \____  $$| $$      | $$__  $$       \  $$ $$/   | $$  | $$  $$$| $$
+"  | $$        | $$   /$$  \ $$| $$    $$| $$  | $$        \  $$$/    | $$  | $$\  $ | $$
+"  | $$       /$$$$$$|  $$$$$$/|  $$$$$$/| $$  | $$  /$$    \  $/    /$$$$$$| $$ \/  | $$
+"  |__/      |______/ \______/  \______/ |__/  |__/  |_/     \_/    |______/|__/     |__/
+"
+"
+"   This is the personal .vimrc file of Travis Fischer (aka Fisch). 
+"   (www.transitivebullshit.com)
+"   
+"   Based off of Steve Francia's excellent spf13 vim distribution. 
+"   (http://spf13.com)
+" }
 
-" note - make selection in visual mode, then type +y to copy to X11 buffer
-
-" convert a file to HTML!!!
-" gvim -f +"syn on" +"run! syntax/2html.vim" +"wq" +"q" main.cpp
-
-autocmd FileWritePost,BufWritePost *.less :call LessCSSCompress()
-autocmd BufNewFile,BufRead *.less set filetype=css
-autocmd BufNewFile,BufRead *.less.template set filetype=css
-
-" automatically compile %.less to %.css on write
-function! LessCSSCompress()
-  let cwd  = expand('%:p:h')
-  let name = expand('%:t:r')
-  
-  "execute '!clear; echo '.cwd.' '.name
-  
-  if (executable('lessc'))
-    cal system('lessc '.cwd.'/'.name.'.less > '.cwd.'/'.name.'.css &')
-  endif
-endfunction
-
-filetype plugin on
-
-:set tabstop=4 shiftwidth=4 softtabstop=4
-
-" show matching parenthesis
-set sm
-" force tabs to use spaces instead of \t
-set expandtab
-" indent on enter according to previous line's format
-set smartindent
-" color :)
-syntax on
-" incremental search-as-you-type
-"set incsearch
-" highlight search terms
-set hlsearch
-" auto-write file when switching files with :e
-set autowrite
-" enable mouse support for all modes
-"    On some windowing systems, this requires you to use 'Shift' plus 
-" the mouse to use the window manager's clipboard.
-set mouse=a
-
-set ai sm
-
-":inoremap # #
-
-:autocmd FileType C,H,c,cc,cpp,h,pde,java,pl,cs,m set formatoptions=croql cindent
-:autocmd FileType py  set tabstop=4 shiftwidth=4 softtabstop=4
-:autocmd FileType pde,cs,m,h  set tabstop=4 shiftwidth=4 softtabstop=4
-
-" Automatically enable GLSL syntax highlighting
-:au BufNewFile,BufRead *.frag,*.vert,*.fp,*.vp,*.glsl setf glsl
-":au! FileType python setl nosmartindent
-:autocmd BufRead *.py inoremap # X<c-h>#
-
-:abbr #d #define
-:abbr #i #include
-:abbr #b /* ------------------------------------------------
-:abbr #e   ------------------------------------------------ */
-
-:let html_use_css=1
-
-"map! <F10> <Esc>:setlocal spell spelllang=en_us<CR><CR>
-"map! <F11> <Esc>:setlocal nospell<CR><CR>
-map! <F8>  <Esc>:w<CR>
-map  <F8>  <Esc>:w<CR>
-
-if has('unix')
-    let s:sep='/' 				" path separator
-    map! <F7>  <Esc>:!clear && python -i '%:p'<CR>
-    map  <F7>  <Esc>:!clear && python -i '%:p'<CR>
-else " windows
-    let s:sep='\'
-    map! <F7>  <Esc>:call CompileCSProj('msb')<CR>
-    map  <F7>  <Esc>:call CompileCSProj('msb')<CR>
-    map! <F6>  <Esc>:call CompileCSProj('msbw')<CR>
-    map  <F6>  <Esc>:call CompileCSProj('msbw')<CR>
-    map! <F9>  <Esc>:call DoEdit()<CR>
-    map  <F9>  <Esc>:call DoEdit()<CR>
+" Environment {
+    " Basic settings {
+        set nocompatible        " Must be first line (disables vi-compatibility support)
+        
+        if !(has('win16') || has('win32') || has('win64'))
+            set shell=/bin/sh
+        endif
+    " }
     
-    nnoremap msb          <Esc>:call CompileCSProj('msb')<CR>
-    nnoremap msbw         <Esc>:call CompileCSProj('msbw')<CR>
+    " Windows settings {
+        " On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
+        " across (heterogeneous) systems easier.
+        if has('win32') || has('win64')
+            set gfn=Courier\ New:h12:b:cANSI
+            set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
+            
+            " If PowerShell is installed on the machine then set it up as the shell
+            let s:powershell_path = $windir.'\system32\WindowsPowerShell\v1.0\powershell.exe'  
+            if filereadable(s:powershell_path)
+                exe "set shell=".s:powershell_path
+                set shellcmdflag="-Command - " 
+            endif
+        endif
+    " }
     
-    set shell=\"%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe\ -nologo\ -noexit\"
-endif
+    " Setup Bundle Support {
+        filetype plugin on
+        
+        " initialize pathogen package manager
+        execute pathogen#infect()
+    " }
+" }
 
-" Sane indentation in insert mode!!!
-map! <CR>  <CR><up><down>
-:set cpo+=I
+" General {
+    filetype plugin indent on   " Automatically detect file types.
+    syntax on                   " Syntax highlighting
+    scriptencoding utf-8
+    
+    if has ('x') && has ('gui') " On Linux use + register for copy-paste
+        set clipboard=unnamedplus
+    elseif has ('gui')          " On mac and Windows, use * register for copy-paste
+        set clipboard=unnamed
+    endif
+    
+    set tabstop=4 shiftwidth=4 softtabstop=4
+    
+    fun! <SID>StripTrailingWhitespaces()
+        let l = line(".")
+        let c = col(".")
+        %s/\s\+$//e
+        call cursor(l, c)
+    endfun
+    
+    autocmd FileType javascript,html,css,less autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
+    autocmd FileType javascript,html,css,less set tabstop=2 shiftwidth=2 softtabstop=2
+    
+    set sm                      " show matching parenthesis
+    set ai sm
+    
+    set expandtab               " force tabs to use spaces instead of \t
+    set smartindent             " indent on enter according to previous line's format
+    
+    set autowrite               " auto-write file when switching files with :e
+    
+    set mouse=a
+    set mouse=a                 " Automatically enable mouse usage
+    set mousehide               " Hide the mouse cursor while typing
+    
+    " fix unclosed paren indents, switch indents, and public/private indents
+    set cinoptions+=:1s,l1,g1s,h1s,(0,u0,W1s
+    
+    set history=1000            " Store a ton of history (default is 20)
+    set shortmess+=filmnrxoOtT  " Abbrev. of messages (avoids 'hit enter')
+    
+    set nobackup
+    set nowritebackup
+    set noswapfile
+    set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp 
+    
+    set directory=/tmp
+    set viewdir=$HOME/.vim/sessions         " View files location
+    
+    if has('persistent_undo')
+        set undofile            " persistent undo
+        set undolevels=1000     " Maximum number of changes that can be undone
+        set undoreload=10000    " Maximum number lines to save for undo on a buffer reload
+    endif
+" }
 
+" Vim UI {
+    " silent (no annoying beep, hurray!)
+    set vb t_vb=".
+    
+    " open files using current directory
+    set browsedir=buffer
+    
+    " customize status line
+    if has('statusline')
+        set laststatus=2
+        "set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
+        
+        set statusline=%<%f\                     " Filename
+        set statusline+=%w%h%m%r                 " Options
+        set statusline+=%{fugitive#statusline()} " Git Hotness
+        "set statusline+=\ [%{&ff}/%Y]            " Filetype
+        "set statusline+=\ [%{getcwd()}]          " Current dir
+        set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
+    endif
+    
+    set backspace=indent,eol,start  " Backspace for dummies
+    set linespace=0                 " No extra spaces between rows
+    "set nu                          " Line numbers on
+    set showmatch                   " Show matching brackets/parenthesis
+    "set incsearch                   " Find as you type search
+    set hlsearch                    " Highlight search terms
+    set winminheight=0              " Windows can be 0 line high
+    "set ignorecase                  " Case insensitive search
+    set smartcase                   " Case sensitive when uc present
+    set wildmenu                    " Show list instead of just completing
+    set wildmode=list:longest,full  " Command <Tab> completion, list matches, then longest common part, then all.
+    set wildignore=*.o,*.pyc
+    set whichwrap=b,s,h,l,<,>,[,]   " Backspace and cursor keys wrap too
+    set scrolljump=5                " Lines to scroll when cursor leaves screen
+    set scrolloff=3                 " Minimum lines to keep above and below cursor
+    set foldenable                  " Auto fold code
+    "set list
+    "set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
+    
+    " Sane indentation in insert mode
+    "map! <CR>  <CR><up><down>
+    "set cpo+=I
+    
+    " GVim {
+        if has('gui_running')
+            set guioptions-=m        " Remove the menu & toolbar
+            set guioptions-=T
+            set lines=75 columns=236 " Set fullscreen
+            
+            if has("gui_gtk2")
+                set guifont=Andale\ Mono\ Regular\ 16,Menlo\ Regular\ 15,Consolas\ Regular\ 16,Courier\ New\ Regular\ 18
+            elseif has("gui_mac")
+                set guifont=Andale\ Mono\ Regular:h16,Menlo\ Regular:h15,Consolas\ Regular:h16,Courier\ New\ Regular:h18
+            elseif has("gui_win32")
+                set guifont=Andale_Mono:h10,Menlo:h10,Consolas:h10,Courier_New:h10
+            endif
+            
+            if has('gui_macvim')
+                set transparency=5  " Make the window slightly transparent
+            endif
+        else
+            if &term == 'xterm' || &term == 'screen'
+                set t_Co=256        " Enable 256 colors to stop the CSApprox warning and make xterm vim shine
+            endif
+            "set term=builtin_ansi  " Make arrow and other keys work
+        endif
+    " }
+" }
 
-" highlight current line
-"set cursorline term=ansi ctermbg=4
-"set showcmd
+" FileTypes {
+    au FileType C,H,c,cc,cpp,h,pde,java,pl,cs,m set formatoptions=croql cindent
+    au FileType py  set tabstop=4 shiftwidth=4 softtabstop=4
+    au FileType pde,cs,m,h  set tabstop=4 shiftwidth=4 softtabstop=4
 
-set wildmenu
-set wildmode=longest,full
-set wildignore=*.o
+    " Automatically enable GLSL syntax highlighting
+    au BufNewFile,BufRead *.frag,*.vert,*.fp,*.vp,*.glsl setf glsl
+    ":au! FileType python setl nosmartindent
+    au BufRead *.py inoremap # X<c-h>#
 
-" fix pasting so you don't get the step down effect
-":set invpaste paste?
-"map <C-Z> :shell
+    au FileWritePost,BufWritePost *.less :call LessCSSCompress()
+    au BufNewFile,BufRead *.less set filetype=less
+    
+    " Mapping file extensions to known types
+    au BufRead,BufNewFile *.*proj       setfiletype xml
+    au BufRead,BufNewFile *.xaml        setfiletype xml
+    au BufRead,BufNewFile *.targets     setfiletype xml
+    au BufRead,BufNewFile *.sg          setfiletype cs
+    au BufRead,BufNewFile *.csi         setfiletype cs
+    au BufRead,BufNewFile *.pde         setfiletype java
+    au BufRead,BufNewFile *.ps1         setfiletype ps1
+    
+    let html_use_css=1
+" }
 
-" disable vi-compabibility support
-set nocompatible
+" Key Mappings {
+    let mapleader = ','
+    
+    " Split current buffer with pair source file
+    nnoremap gs         :call SplitPairFile()<CR>
+    " Open pair source file in current buffer
+    nnoremap ge         :call EditPairFile()<CR>
 
-" Automatically chmod +x Shell and Perl scripts
-"au BufWritePost   *.sh             !chmod +x %
-"au BufWritePost   *.pl             !chmod +x %
+    " Open header or source file of word under cursor (either split or in current
+    " buffer
+    nnoremap gcs        wb"zye:call SplitFilePrefix('<C-R>z',".cs")<CR>
+    nnoremap gce        wb"zye:call EditFilePrefix('<C-R>z',".cs")<CR>
 
+    nnoremap ghs        wb"zye:call SplitFilePrefix('<C-R>z',".h")<CR>
+    nnoremap ghe        wb"zye:call EditFilePrefix('<C-R>z',".h")<CR>
 
-" fix unclosed paren indents, switch indents, and public/private indents
-" -- awesome for aligning function arguments -- tfischer
-:set cinoptions+=:1s,l1,g1s,h1s,(0,u0,W1s
+    " inline files
+    nnoremap gis        wb"zye:call SplitFilePrefix(expand("%:r"),".inl")<CR>
+    nnoremap gie        wb"zye:call EditFilePrefix(expand("%:r"),".inl")<CR>
 
+    " Open man page of word under cursor
+    nnoremap gm         wb"zye:!man '<C-R>z'<CR>
 
-" if possible (vague definition), break lines at 80 characters!!
-" after a ';'
-noremap format     :%s/.\{,79\};\s*\|.\{,79\}\s\+/&\r/g
+    " Open man page of word under cursor -- gl specific
+    nnoremap gl         wb"zye:call ManOpenGL('<C-R>z')<CR>
+    
+    " Yank from the cursor to the end of the line, to be consistent with C and D.
+    nnoremap Y y$
+    
+    " Allow using the repeat operator with a visual selection (!)
+    " http://stackoverflow.com/a/8064607/127816
+    "vnoremap . :normal .<CR>
+    
+    " Fix home and end keybindings for screen, particularly on mac
+    " - for some reason this fixes the arrow keys too. huh.
+    map [F $
+    imap [F $
+    map [H g0
+    imap [H g0
+    
+    " For when you forget to sudo.. Really Write the file.
+    cmap w!! w !sudo tee % >/dev/null
+    
+    " Some helpers to edit mode
+    " http://vimcasts.org/e/14
+    cnoremap %% <C-R>=expand('%:h').'/'<cr>
+    map <leader>ew :e %%
+    map <leader>es :sp %%
+    map <leader>ev :vsp %%
+    map <leader>et :tabe %%
+    
+    " Adjust viewports to the same size
+    map <Leader>= <C-w>=
+    
+    " Map <Leader>ff to display all lines with keyword under cursor
+    " and ask which one to jump to
+    nmap <Leader>ff [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
+    
+    " Easier horizontal scrolling
+    map zl zL
+    map zh zH
+    
+    " Inserts the path of the currently edited file into a command
+    " Command mode: Ctrl+P
+    " (stolen from Janus)
+    cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
+    
+    " Shift key fixes {
+        if has("user_commands")
+            command! -bang -nargs=* -complete=file E e<bang> <args>
+            command! -bang -nargs=* -complete=file W w<bang> <args>
+            command! -bang -nargs=* -complete=file Wq wq<bang> <args>
+            command! -bang -nargs=* -complete=file WQ wq<bang> <args>
+            command! -bang Wa wa<bang>
+            command! -bang WA wa<bang>
+            command! -bang Q q<bang>
+            command! -bang QA qa<bang>
+            command! -bang Qa qa<bang>
+        endif
+        
+        cmap Tabe tabe
+    " }
+    
+    " Code folding {
+        nmap <leader>f0 :set foldlevel=0<CR>
+        nmap <leader>f1 :set foldlevel=1<CR>
+        nmap <leader>f2 :set foldlevel=2<CR>
+        nmap <leader>f3 :set foldlevel=3<CR>
+        nmap <leader>f4 :set foldlevel=4<CR>
+        nmap <leader>f5 :set foldlevel=5<CR>
+        nmap <leader>f6 :set foldlevel=6<CR>
+        nmap <leader>f7 :set foldlevel=7<CR>
+        nmap <leader>f8 :set foldlevel=8<CR>
+        nmap <leader>f9 :set foldlevel=9<CR>
+    " }
+" }
 
+" Plugin Customizations {
+    " Misc {
+        let g:NERDShutUp=1
+        let b:match_ignorecase = 1
+    " }
+    
+    " Tabularize {
+        map! <leader>a= :Tabularize /=<CR>
+        map  <leader>a= :Tabularize /=<CR>
+        map! <leader>a: :Tabularize /:<CR>
+        map  <leader>a: :Tabularize /:<CR>
+    " }
+    
+    " nodejs-autocomplete {
+        " automatically open and close the popup menu for nodejs autocompletion
+        au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+    " }
+    
+    " NERDTree {
+        " automatically open NERDTree when vim starts if no files were specified
+        au vimenter * if !argc() | NERDTree | endif
+        
+        map <C-e> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
+        map ,e :NERDTreeFind<CR>
+        nmap ,nt :NERDTreeFind<CR>
+        
+        let NERDTreeShowBookmarks=1
+        let NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr']
+        let NERDTreeChDirMode=0
+        let NERDTreeQuitOnOpen=1
+        let NERDTreeMouseMode=2
+        let NERDTreeShowHidden=1
+        let NERDTreeKeepTreeInNewTab=1
+        let g:nerdtree_tabs_open_on_gui_startup=0
+    " }
+    
+    " OmniComplete {
+        if has("autocmd") && exists("+omnifunc")
+            autocmd Filetype *
+                \if &omnifunc == "" |
+                \setlocal omnifunc=syntaxcomplete#Complete |
+                \endif
+        endif
+        
+        hi Pmenu  guifg=#000000 guibg=#F8F8F8 ctermfg=black ctermbg=Lightgray
+        hi PmenuSbar  guifg=#8A95A7 guibg=#F8F8F8 gui=NONE ctermfg=darkcyan ctermbg=lightgray cterm=NONE
+        hi PmenuThumb  guifg=#F8F8F8 guibg=#8A95A7 gui=NONE ctermfg=lightgray ctermbg=darkcyan cterm=NONE
+        
+        " Some convenient mappings
+        inoremap <expr> <Esc>      pumvisible() ? "\<C-e>\<Esc>" : "\<Esc>"
+        inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
+        inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
+        inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
+        inoremap <expr> <C-d>      pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<C-d>"
+        inoremap <expr> <C-u>      pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<C-u>"
+        
+        " Automatically open and close the popup menu / preview window
+        au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+        set completeopt=menu,preview,longest
+    " }
+    
+    " Ctags {
+        set tags=./tags;/,~/.vimtags
+        
+        " Make tags placed in .git/tags file available in all levels of a repository
+        let gitroot = substitute(system('git rev-parse --show-toplevel'), '[\n\r]', '', 'g')
+        if gitroot != ''
+            let &tags = &tags . ',' . gitroot . '/.git/tags'
+        endif
+    " }
+    
+    " ctrlp {
+        let g:ctrlp_working_path_mode = 'ra'
+        nnoremap <silent> <D-t> :CtrlP<CR>
+        nnoremap <silent> <D-r> :CtrlPMRU<CR>
+        let g:ctrlp_custom_ignore = {
+            \ 'dir':  '\.git$\|\.hg$\|\.svn$',
+            \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$' }
+        
+        " On Windows use "dir" as fallback command.
+        if has('win32') || has('win64')
+            let g:ctrlp_user_command = {
+                \ 'types': {
+                    \ 1: ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others'],
+                    \ 2: ['.hg', 'hg --cwd %s locate -I .'],
+                \ },
+                \ 'fallback': 'dir %s /-n /b /s /a-d'
+            \ }
+        else
+            let g:ctrlp_user_command = {
+                \ 'types': {
+                    \ 1: ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others'],
+                    \ 2: ['.hg', 'hg --cwd %s locate -I .'],
+                \ },
+                \ 'fallback': 'find %s -type f'
+            \ }
+        endif
+    "}
+    
+    " PythonMode {
+        " Disable if python support not present
+        if !has('python')
+            let g:pymode = 1
+        endif
+    " }
+    
+    " Fugitive {
+        nnoremap <silent> <leader>gs :Gstatus<CR>
+        nnoremap <silent> <leader>gd :Gdiff<CR>
+        nnoremap <silent> <leader>gc :Gcommit<CR>
+        nnoremap <silent> <leader>gb :Gblame<CR>
+        nnoremap <silent> <leader>gl :Glog<CR>
+        nnoremap <silent> <leader>gp :Git push<CR>
+        nnoremap <silent> <leader>gr :Gread<CR>:GitGutter<CR>
+        nnoremap <silent> <leader>gw :Gwrite<CR>:GitGutter<CR>
+        nnoremap <silent> <leader>ge :Gedit<CR>
+        nnoremap <silent> <leader>gg :GitGutterToggle<CR>
+    "}
+    
+    " neocomplcache {
+        let g:acp_enableAtStartup = 0
+        let g:neocomplcache_enable_at_startup = 1
+        let g:neocomplcache_enable_camel_case_completion = 1
+        let g:neocomplcache_enable_smart_case = 1
+        let g:neocomplcache_enable_underbar_completion = 1
+        let g:neocomplcache_enable_auto_delimiter = 1
+        let g:neocomplcache_max_list = 15
+        let g:neocomplcache_force_overwrite_completefunc = 1
+        let g:neocomplcache_temporary_dir = "$HOME/.vim/tmp/neocomplcache"
 
-" Split current buffer with pair source file
-nnoremap gs         :call SplitPairFile()<CR>
-" Open pair source file in current buffer
-nnoremap ge         :call EditPairFile()<CR>
+        " SuperTab like snippets behavior.
+        imap <silent><expr><TAB> neosnippet#expandable() ?
+                    \ "\<Plug>(neosnippet_expand_or_jump)" : (pumvisible() ?
+                    \ "\<C-e>" : "\<TAB>")
+        smap <TAB> <Right><Plug>(neosnippet_jump_or_expand)
 
-" Open header or source file of word under cursor (either split or in current
-" buffer
-nnoremap gcs        wb"zye:call SplitFilePrefix('<C-R>z',".cs")<CR>
-nnoremap gce        wb"zye:call EditFilePrefix('<C-R>z',".cs")<CR>
+        " Define dictionary.
+        let g:neocomplcache_dictionary_filetype_lists = {
+                    \ 'default' : '',
+                    \ 'vimshell' : $HOME.'/.vimshell_hist',
+                    \ 'scheme' : $HOME.'/.gosh_completions'
+                    \ }
 
-nnoremap ghs        wb"zye:call SplitFilePrefix('<C-R>z',".h")<CR>
-nnoremap ghe        wb"zye:call EditFilePrefix('<C-R>z',".h")<CR>
+        " Define keyword.
+        if !exists('g:neocomplcache_keyword_patterns')
+            let g:neocomplcache_keyword_patterns = {}
+        endif
+        let g:neocomplcache_keyword_patterns._ = '\h\w*'
 
-" inline files
-nnoremap gis        wb"zye:call SplitFilePrefix(expand("%:r"),".inl")<CR>
-nnoremap gie        wb"zye:call EditFilePrefix(expand("%:r"),".inl")<CR>
+        " Plugin key-mappings {
+            " These two lines conflict with the default digraph mapping of <C-K>
+            " If you prefer that functionality, add the following to your
+            " .vimrc.before.local file:
+            "   let g:spf13_no_neosnippet_expand = 1
+            if !exists('g:spf13_no_neosnippet_expand')
+                imap <C-k> <Plug>(neosnippet_expand_or_jump)
+                smap <C-k> <Plug>(neosnippet_expand_or_jump)
+            endif
 
-" Open man page of word under cursor
-nnoremap gm         wb"zye:!man '<C-R>z'<CR>
+            inoremap <expr><C-g> neocomplcache#undo_completion()
+            inoremap <expr><C-l> neocomplcache#complete_common_string()
+            inoremap <expr><CR> neocomplcache#complete_common_string()
 
-" Open man page of word under cursor -- gl specific
-nnoremap gl         wb"zye:call ManOpenGL('<C-R>z')<CR>
+            " <TAB>: completion.
+            inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+            inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
 
+            " <CR>: close popup
+            " <s-CR>: close popup and save indent.
+            inoremap <expr><s-CR> pumvisible() ? neocomplcache#close_popup()"\<CR>" : "\<CR>"
+            inoremap <expr><CR> pumvisible() ? neocomplcache#close_popup() : "\<CR>"
 
-"nnoremap json  <ESC>:%s/,\s*$/;/g<CR>gg=G:%s/;$/, /g<CR>
-"nnoremap =   <ESC>:%s/,\s*$/;/g<CR>gg=G:%s/;$/,/g<CR>
+            " <C-h>, <BS>: close popup and delete backword char.
+            inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+            inoremap <expr><C-y> neocomplcache#close_popup()
+        " }
 
-":nmap \x :call GetMemberVar()<CR>:exe "/" . Name<CR>
-"
-"map <F10> <Esc>/^%changelog<CR>:r!date +"* \%a \%b \%e \%Y Lars R. Damerow <lars@pixar.com> "<CR>A
+        " Enable omni completion.
+        autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+        autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+        autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+        autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+        autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+        "autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+        autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 
-":function GetInput(str)
-":  call inputsave()
-":  let result = input(a:str)
-":  call inputrestore()
-":  return result
-"endfunction
+        " Haskell post write lint and check with ghcmod
+        " $ `cabal install ghcmod` if missing and ensure
+        " ~/.cabal/bin is in your $PATH.
+        if !executable("ghcmod")
+            autocmd BufWritePost *.hs GhcModCheckAndLintAsync
+        endif
 
+        " Enable heavy omni completion.
+        if !exists('g:neocomplcache_omni_patterns')
+            let g:neocomplcache_omni_patterns = {}
+        endif
+        let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+        let g:neocomplcache_omni_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+        let g:neocomplcache_omni_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+        let g:neocomplcache_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+        "let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\h\w*\|\h\w*::'
 
-"nnoremap gm         wb"zye:call ExecuteCommandInNewWindow("man <C-R>z")<CR>
+        " Use honza's snippets.
+        let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
 
-"nnoremap gd         :call CdCurFile()<CR>
-"nnoremap gs         :tabedit %<CR>
-"nnoremap gmf        wb"zye:call FindMelHelp('<C-R>z')<CR>
-"nnoremap gmm        wb"zye:call OpenMelHelp('<C-R>z')<CR>
+        " Enable neosnippet snipmate compatibility mode
+        let g:neosnippet#enable_snipmate_compatibility = 1
 
+        " For snippet_complete marker.
+        if has('conceal')
+            set conceallevel=2 concealcursor=i
+        endif
 
-" search for expr only in lines > 27
-" /\%>27lexpr
-" 
-" ye -> copy til end of word :)
-" yw -> copy til one char past end of word
+        " Disable the neosnippet preview candidate window
+        " When enabled, there can be too much visual noise
+        " especially when splits are used.
+        set completeopt-=preview
+    " }
+    
+    " GitGutter {
+        let g:gitgutter_realtime = 0
+        set shell=/bin/bash
+    " }
+" }
 
+" Custom Methods {
+    " automatically compile %.less to %.css on write
+    function! LessCSSCompress()
+      let cwd  = expand('%:p:h')
+      let name = expand('%:t:r')
+      
+      if (executable('lessc'))
+        call system('lessc '.cwd.'/'.name.'.less > '.cwd.'/'.name.'.css &')
+      endif
+    endfunction
+    
+    " load files relative to current path by switching to the directory of the
+    " current file 
+    au BufEnter * :call CdCurFile()
+    function! CdCurFile()
+       exec "lcd " substitute(expand("%:p:h"), " ", "\\ ", "g")
+    endfunction
+    
+    """"""" Returns the "pair file name" for the current buffer, e.g.
+    """"""" if editing "foo.cpp" returns "foo.h" and vice versa
+    function GetPairFileName()
+      let root = expand("%:r")
+      let ext = expand("%:e")
+      let newExt = "cs"
+      if ext == "cpp" || ext == "cs" || ext == "c" || ext == "inl" || ext == "C"
+         if filereadable(root.".h")
+            let newExt = "h"
+         elseif filereadable(root.".H")
+            let newExt = "H"
+         endif
+      elseif ext == "h" || ext == "H"
+         if filereadable(root.".cpp")
+            let newExt = "cpp"
+         elseif filereadable(root.".cs")
+            let newExt = "cs"
+         elseif filereadable(root.".c")
+            let newExt = "c"
+         elseif filereadable(root.".C")
+            let newExt = "C"
+         elseif filereadable(root.".m")
+            let newExt = "m"
+         endif
+      elseif ext == "vert"
+         let newExt = "frag"
+      elseif ext == "frag"
+         let newExt = "vert"
+      elseif ext == "vp"
+         let newExt = "fp"
+      elseif ext == "fp"
+         let newExt = "vp"
+      elseif ext == "m"
+         let newExt = "h"
+      endif
+      let file = root.".".newExt
+      return file
+    endfunction
+    
+    function SplitFile(file)
+      exe ":sp" a:file
+    endfunction
+    
+    function EditFile(file)
+      if bufexists(a:file)
+         exe ":b" a:file
+      else
+         exe ":e" a:file
+      endif
+    endfunction
+    
+    """"""" Edits the "pair file" as described above.  Uses :b if the
+    """"""" Edits buffer already exists, else :e.  This ensures that we will go to
+    """"""" Edits the line we were editing before if possible.
+    function SplitPairFile()
+      let file = GetPairFileName()
+      call SplitFile(file)
+    endfunction
+    
+    """"""" Edits the "pair file" as described above.  Uses :b if the
+    """"""" Edits buffer already exists, else :e.  This ensures that we will go to
+    """"""" Edits the line we were editing before if possible.
+    function EditPairFile()
+      let file = GetPairFileName()
+      call EditFile(file)
+    endfunction
+    
+    function EditFilePrefix(prefix, suffix)
+      let file = a:prefix.a:suffix
+      echo file
+      call EditFile(file)
+    endfunction
+    
+    function SplitFilePrefix(prefix, suffix)
+      let file = a:prefix.a:suffix
+      echo file
+      call SplitFile(file)
+    endfunction
+    
+    " opens the maya help in a view
+    function OpenMelHelp(aMelCommand)
+        execute "new " . a:aMelCommand
+        execute ":setlocal buftype=nowrite"
+        execute ":setlocal bufhidden=delete"
+        execute ":setlocal noswapfile"
+        execute ":.! w3m -dump \"http://maya6docs.pixar.com/Maya6.0/en_US/Commands/" . a:aMelCommand . ".html\""
+    endfunction
+    
+    " finds the maya help in a view
+    function FindMelHelp(aMelSubstring)
+        execute "new " . a:aMelSubstring
+        execute ":setlocal buftype=nowrite"
+        execute ":setlocal bufhidden=delete"
+        execute ":setlocal noswapfile"
+        execute ":.! w3m -dump \"http://mayadocs.pixar.com/Maya5.0/en_US/Commands/index_substring.html?" . a:aMelSubstring
+    endfunction
+    
+    " display results of a command in a new window
+    function ExecuteCommandInNewWindow(aCommand)
+        execute "new"
+        execute ":setlocal buftype=nowrite"
+        execute ":setlocal bufhidden=delete"
+        execute ":setlocal noswapfile"
+        let cmd = ":.!".a:aCommand
+        echo cmd
+        execute cmd
+    endfunction
+    
+    " googles the given string
+    function Google(aString)
+        let aUrl = "w3m -dump \"http://www.google.com/search?q=" . a:aString . "\""
+        echo aUrl
+        call ExecuteCommandInNewWindow(aUrl)
+    endfunction
+    
+    " searches the official OpenGL docs
+    " 
+    " Ex. for glClearDepth
+    " http://www.opengl.org/documentation/specs/man_pages/hardcopy/GL/html/gl/cleardepth.html
+    function ManOpenGL(aString)
+        if match(a:aString, "glu") == 0
+            let prefixStr = "glu"
+            let str = tolower(strpart(a:aString, 3))
+        elseif match(a:aString, "gl") == 0
+            let prefixStr = "gl"
+            let str = tolower(strpart(a:aString, 2))
+        else
+            echo "Unable to find " . a:aString
+            return
+        endif
+        let aUrl = "w3m -dump \"http://www.opengl.org/documentation/specs/man_pages/hardcopy/GL/html/".prefixStr."/".str.".html\""
+        call ExecuteCommandInNewWindow(aUrl)
+    endfunction
+" }
 
-" silent (no annoying beep, hurray!)
-:set vb t_vb=".
-" Maki GUI File Open use current directory
-:set browsedir=buffer
+" Notes {
+    " search for expr only in lines > 27
+    " /\%>27lexpr
+    
+    "converts .less to .css (lessc required)
+    "nnoremap ,m :w <BAR> !lessc % > %:t:r.css<CR><space>
+    "
+    " zR opens all folds
+    " zM closes all folds
+" }
 
-"
-" custom methods
-"
-
-function! CompileCSProj(buildtool)
-    let csproj = GetCSProj()
-    let str = a:buildtool.' '.csproj
-    "echo str
-    execute "!clear; echo ".str."; ".str
-    "call system(str)
-endfunction
-
-function! DoEdit()
-    let name = expand("%")
-    let str = "sd edit ".name
-    execute "!clear; echo \"".str."\"; ".str
-endfunction
-
-" extract most likely name of .csproj from current directory name
-function! GetCSProj()
-    return expand("%:p:h") . "\\" . expand("%:p:h:t") . ".csproj"
-endfunction
-
-" load files relative to current path by switching to the directory of the
-" current file 
-:autocmd BufEnter * :call CdCurFile()
-:function! CdCurFile()
-:   exec "lcd " substitute(expand("%:p:h"), " ", "\\ ", "g")
-:endfunction
-
-
-""""""" Returns the "pair file name" for the current buffer, e.g.
-""""""" if editing "foo.cpp" returns "foo.h" and vice versa
-:function GetPairFileName()
-:  let root = expand("%:r")
-:  let ext = expand("%:e")
-:  let newExt = "cs"
-:  if ext == "cpp" || ext == "cs" || ext == "c" || ext == "inl" || ext == "C"
-:     if filereadable(root.".h")
-:        let newExt = "h"
-:     elseif filereadable(root.".H")
-:        let newExt = "H"
-:     endif
-:  elseif ext == "h" || ext == "H"
-:     if filereadable(root.".cpp")
-:        let newExt = "cpp"
-:     elseif filereadable(root.".cs")
-:        let newExt = "cs"
-:     elseif filereadable(root.".c")
-:        let newExt = "c"
-:     elseif filereadable(root.".C")
-:        let newExt = "C"
-:     elseif filereadable(root.".m")
-:        let newExt = "m"
-:     endif
-:  elseif ext == "vert"
-:     let newExt = "frag"
-:  elseif ext == "frag"
-:     let newExt = "vert"
-:  elseif ext == "vp"
-:     let newExt = "fp"
-:  elseif ext == "fp"
-:     let newExt = "vp"
-:  elseif ext == "m"
-:     let newExt = "h"
-:  endif
-:  let file = root.".".newExt
-:  return file
-:endfunction
-
-"" Note:
-"" :<C-R><C-W>  inserts current word in ':' command line
-""              (very useful for searching)
-
-
-:function SplitFile(file)
-:  exe ":sp" a:file
-:endfunction
-
-:function EditFile(file)
-:  if bufexists(a:file)
-:     exe ":b" a:file
-:  else
-:     exe ":e" a:file
-:  endif
-:endfunction
-
-
-
-""""""" Edits the "pair file" as described above.  Uses :b if the
-""""""" Edits buffer already exists, else :e.  This ensures that we will go to
-""""""" Edits the line we were editing before if possible.
-:function SplitPairFile()
-:  let file = GetPairFileName()
-:  call SplitFile(file)
-:endfunction
-
-""""""" Edits the "pair file" as described above.  Uses :b if the
-""""""" Edits buffer already exists, else :e.  This ensures that we will go to
-""""""" Edits the line we were editing before if possible.
-:function EditPairFile()
-:  let file = GetPairFileName()
-:  call EditFile(file)
-:endfunction
-
-:function EditFilePrefix(prefix, suffix)
-:  let file = a:prefix.a:suffix
-:  echo file
-:  call EditFile(file)
-:endfunction
-
-:function SplitFilePrefix(prefix, suffix)
-:  let file = a:prefix.a:suffix
-:  echo file
-:  call SplitFile(file)
-:endfunction
-
-"
-" function to open the maya help in a view
-"
-:function OpenMelHelp(aMelCommand)
-:    execute "new " . a:aMelCommand
-:    execute ":setlocal buftype=nowrite"
-:    execute ":setlocal bufhidden=delete"
-:    execute ":setlocal noswapfile"
-:    execute ":.! w3m -dump \"http://maya6docs.pixar.com/Maya6.0/en_US/Commands/" . a:aMelCommand . ".html\""
-:endfunction
-
-"
-" function to find the maya help in a view
-"
-:function FindMelHelp(aMelSubstring)
-:    execute "new " . a:aMelSubstring
-:    execute ":setlocal buftype=nowrite"
-:    execute ":setlocal bufhidden=delete"
-:    execute ":setlocal noswapfile"
-:    execute ":.! w3m -dump \"http://mayadocs.pixar.com/Maya5.0/en_US/Commands/index_substring.html?" . a:aMelSubstring
-:endfunction
-
-"
-" function to display results of a command in a new window
-"
-:function ExecuteCommandInNewWindow(aCommand)
-:    execute "new"
-:    execute ":setlocal buftype=nowrite"
-:    execute ":setlocal bufhidden=delete"
-:    execute ":setlocal noswapfile"
-:    let cmd = ":.!".a:aCommand
-:    echo cmd
-:    execute cmd
-:endfunction
-
-"
-" function to run google
-"
-:function Google(aString)
-:    let aUrl = "w3m -dump \"http://www.google.com/search?q=" . a:aString . "\""
-:    echo aUrl
-:    call ExecuteCommandInNewWindow(aUrl)
-:endfunction
-
-"
-" function to search for official OpenGL docs
-" 
-" Ex. for glClearDepth
-" http://www.opengl.org/documentation/specs/man_pages/hardcopy/GL/html/gl/cleardepth.html
-"
-:function ManOpenGL(aString)
-:    if match(a:aString, "glu") == 0
-:        let prefixStr = "glu"
-:        let str = tolower(strpart(a:aString, 3))
-:    elseif match(a:aString, "gl") == 0
-:        let prefixStr = "gl"
-:        let str = tolower(strpart(a:aString, 2))
-:    else
-:        echo "Unable to find " . a:aString
-:        return
-:    endif
-:    let aUrl = "w3m -dump \"http://www.opengl.org/documentation/specs/man_pages/hardcopy/GL/html/".prefixStr."/".str.".html\""
-:    call ExecuteCommandInNewWindow(aUrl)
-:endfunction
-
-"
-" source plugins
-"    matchit allows matching of html/php tags
-"
-source $VIMRUNTIME/macros/matchit.vim
-
-" If PowerShell is installed on the machine then set it up as the shell
-let s:powershell_path = $windir.'\system32\WindowsPowerShell\v1.0\powershell.exe'  
-if filereadable(s:powershell_path)
-    exe "set shell=".s:powershell_path
-    set shellcmdflag="-Command - " 
-endif
-
-" Automatically check RO files out from SD
-"au FileChangedRO * call AutoCheckout()
-
-"function AutoCheckout() 
-"    if (confirm("Checkout?", "&Yes\n&No", 1) == 1) 
-"        call SDCheckOut()
-"
-"        " Checking out the file causes it to be reloaded, but BufRead
-"        " does not automatically happen for some reason causing us to
-"        " loose syntax highlighting, etc.  Force it.
-"        doautocmd BufRead
-"    endif 
-"endfunction
-
-" Mapping file extensions to known types
-au BufRead,BufNewFile *.*proj                setfiletype xml
-au BufRead,BufNewFile *.xaml                 setfiletype xml
-au BufRead,BufNewFile *.targets              setfiletype xml
-au BufRead,BufNewFile *.sg                   setfiletype cs
-au BufRead,BufNewFile *.csi                  setfiletype cs
-au BufRead,BufNewFile *.pde                  setfiletype java
-au BufRead,BufNewFile *.ps1                  setfiletype ps1
-
-" Some plugins are failing to autoload:
-"source $home/vimfiles/plugin/a.vim
-"source $home/vimfiles/plugin/cscomment.vim
-"source $home/vimfiles/plugin/taglist.vim
-
-" Options for minibufexpl.vim
-"let g:miniBufExplMapWindowNavVim = 1
-"let g:miniBufExplMapCTabSwitchBufs = 1
-"let g:miniBufExplModSelTarget = 1
-
-" Don't write *.tmp files into the area where I am working
-set dir=/tmp
-
-" System vimrc file for Mac OS X
-" Author:  Benji Fisher <benji@member.AMS.org>
-" Last modified:  8 May 2006
-
-" TODO:  Is there a better way to tell that Vim.app was started from Finder.app?
-" Note:  Do not move this to the gvimrc file, else this value of $PATH will
-" not be available to plugin scripts.
-if has("gui_running") && system('ps xw | grep "Vim -psn" | grep -vc grep') > 0
-  " Get the value of $PATH from a login shell.
-  " If your shell is not on this list, it may be just because we have not
-  " tested it.  Try adding it to the list and see if it works.  If so,
-  " please post a note to the vim-mac list!
-  if $SHELL =~ '/\(sh\|csh\|bash\|tcsh\|zsh\)$'
-    let s:path = system("echo echo VIMPATH'${PATH}' | $SHELL -l")
-    let $PATH = matchstr(s:path, 'VIMPATH\zs.\{-}\ze\n')
-  endif
-endif

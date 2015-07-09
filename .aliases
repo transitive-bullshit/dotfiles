@@ -150,9 +150,11 @@ alias c='clear'
 alias :e='vi'
 
 alias h='heroku'
+alias hc='heroku config'
 alias hcp='heroku config:pull --overwrite'
 
-alias gs='git status'
+alias gs='git s'
 alias gp='git commit -am "." && git push'
+alias gd='git diff origin/master'
 
 alias kc='ps -e | grep "python.*crawler" | grep -v grep | sed "s/^ *\([0-9]*\).*/\1/" | xargs kill -9'

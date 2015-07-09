@@ -244,3 +244,27 @@ function o() {
 function tre() {
 	tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
 }
+
+#
+# echoc (msg color)
+# Echos the msg with the specified color
+#
+function echoc () {
+  msg=$1
+  color=$2
+  [ -z $color ] && color=$PURPLE || color=${!color}
+  [ ! -z $color ] || color=$PURPLE
+  echo "$color$msg$RESET"
+}
+
+#
+# run(@)
+# Runs `cmd` unless -d (i.e. DRY_RUN) is set.
+#
+function run () {
+  echoc "$*"
+  if [ -z $DRY_RUN ]; then
+    "$@"
+  fi
+}
+
