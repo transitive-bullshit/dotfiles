@@ -2,6 +2,10 @@
 
 ![Screenshot of my shell prompt](http://i.imgur.com/EkEtphC.png)
 
+## NOTES
+
+This is my custom version of Mathias Bynens' excellent MacOS bootstrap setup. Aside from some simple setting tweaks, it adds extensive Vim customization via Pathogen and a modified version of the (baller) [spf13](https://github.com/spf13/spf13-vim) Vim distribution.
+
 ## Installation
 
 ### Using Git and the bootstrap script
