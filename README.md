@@ -1,4 +1,8 @@
-# Mathias’s dotfiles
+# fisch’s dotfiles
+
+## NOTES
+
+This is my customized version of *Mathias Bynens*' excellent MacOS bootstrap setup. Aside from some simple settings tweaks, it adds extensive Vim customization via Pathogen and a modified version of the (baller) [spf13](https://github.com/spf13/spf13-vim) Vim distribution. All pathogen plugins are submodules and must be initialized properly before running the `bootstrap` script.
 
 ![Screenshot of my shell prompt](http://i.imgur.com/EkEtphC.png)
 
