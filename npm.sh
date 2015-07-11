@@ -15,4 +15,5 @@ npm install -g bower
 npm install -g standard
 npm install -g less
 npm install -g tape
+npm install -g castnow
 
