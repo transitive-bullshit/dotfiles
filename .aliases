@@ -151,7 +151,7 @@ alias :e='vi'
 
 alias h='heroku'
 alias hc='heroku config'
-alias hcp='heroku config:pull --overwrite'
+alias hcp='heroku config:pull --overwrite && cat .env'
 
 alias gs='git s'
 alias gp='git commit -am "." && git push'
