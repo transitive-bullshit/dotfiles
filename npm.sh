@@ -19,7 +19,9 @@ npm install -g tape
 npm install -g castnow
 
 # install some of the most common node dependencies globally just in case i'm 
-# on a remote island without internet and need to hack some codez
+# on a remote island without internet getting attacked by zombies with lasers 
+# and need to hack some codez to save the dayz
+npm install -g cordova ionic
 npm install -g request
 npm install -g async
 npm install -g cheerio
