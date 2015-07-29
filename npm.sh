@@ -17,6 +17,7 @@ npm install -g standard
 npm install -g less
 npm install -g tape
 npm install -g castnow
+npm install -g spoof
 
 # install some of the most common node dependencies globally just in case i'm 
 # on a remote island without internet getting attacked by zombies with lasers 
