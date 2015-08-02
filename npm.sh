@@ -18,6 +18,7 @@ npm install -g less
 npm install -g tape
 npm install -g castnow
 npm install -g spoof
+npm install -g jshint
 
 # install some of the most common node dependencies globally just in case i'm 
 # on a remote island without internet getting attacked by zombies with lasers 
@@ -35,7 +36,6 @@ npm install -g redis
 npm install -g chalk
 npm install -g colors
 npm install -g q
-npm install -g jshint
 npm install -g bcrypt
 npm install -g glob
 npm install -g http-server
