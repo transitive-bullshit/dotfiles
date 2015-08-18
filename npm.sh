@@ -19,6 +19,7 @@ npm install -g tape
 npm install -g castnow
 npm install -g spoof
 npm install -g jshint
+npm install -g node-inspector
 
 # install some of the most common node dependencies globally just in case i'm 
 # on a remote island without internet getting attacked by zombies with lasers 
@@ -46,3 +47,4 @@ npm install -g extends
 npm install -g moment
 npm install -g debug
 npm install -g once
+npm install -g dotenv

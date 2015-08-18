@@ -74,7 +74,7 @@
     endfun
     
     autocmd FileType javascript,html,css,less autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
-    autocmd FileType javascript,html,css,less set tabstop=2 shiftwidth=2 softtabstop=2
+    autocmd FileType javascript,html,css,less,json set tabstop=2 shiftwidth=2 softtabstop=2
     
     set sm                      " show matching parenthesis
     set ai sm
@@ -524,6 +524,11 @@
         let g:gitgutter_realtime = 0
         set shell=/bin/bash
     " }
+
+    " Syntastic {
+        " add html exceptions for proprietary angular, ionic, and angular-material tags / attributes
+        let g:syntastic_html_tidy_ignore_errors=["<ion-", "discarding unexpected </ion-", "<md-", "discarding unexpected </md-", " proprietary attribute \"ng-"]
+    " }
 " }
 
 " Custom Methods {
@@ -689,4 +694,3 @@
     " zR opens all folds
     " zM closes all folds
 " }
-
