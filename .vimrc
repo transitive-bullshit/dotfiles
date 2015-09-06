@@ -526,7 +526,6 @@
     " }
 
     " Syntastic {
-        " add html exceptions for proprietary angular, ionic, and angular-material tags / attributes
         let g:syntastic_html_tidy_ignore_errors=["<ion-", "discarding unexpected </ion-", "<md-", "discarding unexpected </md-", " proprietary attribute \"ng-"]
     " }
 " }
@@ -546,7 +545,7 @@
     " current file 
     au BufEnter * :call CdCurFile()
     function! CdCurFile()
-       exec "lcd " substitute(expand("%:p:h"), " ", "\\ ", "g")
+       exec "lcd %:p:h:gs/ /\\ /"
     endfunction
     
     """"""" Returns the "pair file name" for the current buffer, e.g.
@@ -694,3 +693,4 @@
     " zR opens all folds
     " zM closes all folds
 " }
+
