@@ -49,3 +49,5 @@ complete -W "NSGlobalDomain" defaults;
 
 git config --global user.name "Travis Fischer";
 git config --global user.email fisch0920@gmail.com;
+
+[ -f "$HOME/.nvm/nvm.sh" ] && source "$HOME/.nvm/nvm.sh";
