@@ -74,7 +74,7 @@
     endfun
     
     autocmd FileType javascript,html,css,less autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
-    autocmd FileType javascript,html,css,less,json set tabstop=2 shiftwidth=2 softtabstop=2
+    autocmd FileType javascript,html,css,less set tabstop=2 shiftwidth=2 softtabstop=2
     
     set sm                      " show matching parenthesis
     set ai sm
@@ -94,13 +94,16 @@
     set history=1000            " Store a ton of history (default is 20)
     set shortmess+=filmnrxoOtT  " Abbrev. of messages (avoids 'hit enter')
     
+    "set backup
+    "set writebackup
     set nobackup
     set nowritebackup
-    set noswapfile
-    set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp 
-    
-    set directory=/tmp
-    set viewdir=$HOME/.vim/sessions         " View files location
+    "set noswapfile
+
+    set backupdir=$HOME/.vim/backup//,$HOME/.tmp//,$HOME/tmp//,/tmp//
+    set directory=$HOME/.vim/swap//,$HOME/.tmp//,$HOME/tmp//,/tmp//
+    set undodir=$HOME/.vim/undo//,$HOME/.tmp//,$HOME/tmp//,/tmp//
+    set viewdir=$HOME/.vim/sessions
     
     if has('persistent_undo')
         set undofile            " persistent undo
@@ -524,10 +527,6 @@
         let g:gitgutter_realtime = 0
         set shell=/bin/bash
     " }
-
-    " Syntastic {
-        let g:syntastic_html_tidy_ignore_errors=["<ion-", "discarding unexpected </ion-", "<md-", "discarding unexpected </md-", " proprietary attribute \"ng-"]
-    " }
 " }
 
 " Custom Methods {
@@ -545,7 +544,7 @@
     " current file 
     au BufEnter * :call CdCurFile()
     function! CdCurFile()
-       exec "lcd %:p:h:gs/ /\\ /"
+       exec "lcd " substitute(expand("%:p:h"), " ", "\\ ", "g")
     endfunction
     
     """"""" Returns the "pair file name" for the current buffer, e.g.
@@ -625,24 +624,6 @@
       let file = a:prefix.a:suffix
       echo file
       call SplitFile(file)
-    endfunction
-    
-    " opens the maya help in a view
-    function OpenMelHelp(aMelCommand)
-        execute "new " . a:aMelCommand
-        execute ":setlocal buftype=nowrite"
-        execute ":setlocal bufhidden=delete"
-        execute ":setlocal noswapfile"
-        execute ":.! w3m -dump \"http://maya6docs.pixar.com/Maya6.0/en_US/Commands/" . a:aMelCommand . ".html\""
-    endfunction
-    
-    " finds the maya help in a view
-    function FindMelHelp(aMelSubstring)
-        execute "new " . a:aMelSubstring
-        execute ":setlocal buftype=nowrite"
-        execute ":setlocal bufhidden=delete"
-        execute ":setlocal noswapfile"
-        execute ":.! w3m -dump \"http://mayadocs.pixar.com/Maya5.0/en_US/Commands/index_substring.html?" . a:aMelSubstring
     endfunction
     
     " display results of a command in a new window
