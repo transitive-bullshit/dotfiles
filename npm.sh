@@ -20,6 +20,7 @@ npm install -g castnow
 npm install -g spoof
 npm install -g jshint
 npm install -g node-inspector
+npm install -g typescript
 
 # install some of the most common node dependencies globally just in case i'm 
 # on a remote island without internet getting attacked by zombies with lasers 
