@@ -50,4 +50,8 @@ complete -W "NSGlobalDomain" defaults;
 git config --global user.name "Travis Fischer";
 git config --global user.email fisch0920@gmail.com;
 
+if [ -f `brew --prefix`/etc/bash_completion ]; then
+    source `brew --prefix`/etc/bash_completion
+fi
+
 [ -f "$HOME/.nvm/nvm.sh" ] && source "$HOME/.nvm/nvm.sh";

@@ -46,10 +46,10 @@ brew install homebrew/dupes/openssh
 brew install homebrew/dupes/screen
 
 # Install font tools.
-brew tap bramstein/webfonttools
-brew install sfnt2woff
-brew install sfnt2woff-zopfli
-brew install woff2
+#brew tap bramstein/webfonttools
+#brew install sfnt2woff
+#brew install sfnt2woff-zopfli
+#brew install woff2
 
 # Install some CTF tools; see https://github.com/ctfs/write-ups.
 #brew install aircrack-ng
@@ -82,7 +82,8 @@ brew install ack
 brew install ffmpeg
 brew install git
 brew install git-lfs
-brew install imagemagick --with-webp
+brew install git-flow
+brew install imagemagick
 brew install lua
 brew install lynx
 brew install tree
