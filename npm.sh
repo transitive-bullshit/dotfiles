@@ -22,6 +22,9 @@ npm install -g jshint
 npm install -g node-inspector
 npm install -g typescript
 
+# for working with esversion 6
+npm install -g eslint babel-eslint eslint-plugin-react
+
 # install some of the most common node dependencies globally just in case i'm 
 # on a remote island without internet getting attacked by zombies with lasers 
 # and need to hack some codez to save the dayz
