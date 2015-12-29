@@ -21,6 +21,7 @@ npm install -g spoof
 npm install -g jshint
 npm install -g node-inspector
 npm install -g typescript
+npm install -g tldr
 
 # for working with esversion 6
 npm install -g eslint babel-eslint eslint-plugin-react

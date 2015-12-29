@@ -64,8 +64,6 @@
         set clipboard=unnamed
     endif
     
-    set tabstop=4 shiftwidth=4 softtabstop=4
-    
     fun! <SID>StripTrailingWhitespaces()
         let l = line(".")
         let c = col(".")
@@ -73,14 +71,19 @@
         call cursor(l, c)
     endfun
     
-    autocmd FileType javascript,html,css,less autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
-    autocmd FileType javascript,html,css,less set tabstop=2 shiftwidth=2 softtabstop=2
-    
-    set sm                      " show matching parenthesis
-    set ai sm
-    
+    set tabstop=2 shiftwidth=2 softtabstop=2
+
     set expandtab               " force tabs to use spaces instead of \t
     set smartindent             " indent on enter according to previous line's format
+    
+    autocmd FileType javascript,html,css,less autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
+    autocmd FileType javascript,html,css,less set tabstop=2 shiftwidth=2 softtabstop=2
+
+    " for eko projects, use weird non-standard settings...
+    autocmd BufNewFile,BufRead ~/dev/eko/* setlocal tabstop=4 shiftwidth=4 softtabstop=4 noexpandtab
+
+    set sm                      " show matching parenthesis
+    set ai sm
     
     set autowrite               " auto-write file when switching files with :e
     
