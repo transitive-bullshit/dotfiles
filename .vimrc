@@ -71,6 +71,8 @@
         call cursor(l, c)
     endfun
     
+    set clipboard=unnamed       " clipboard goes to system clipboard
+
     set tabstop=2 shiftwidth=2 softtabstop=2
 
     set expandtab               " force tabs to use spaces instead of \t
