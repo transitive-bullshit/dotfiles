@@ -147,6 +147,7 @@ alias hc='heroku config'
 alias hcp='heroku config:pull --overwrite && cat .env'
 
 alias gs='git s'
+alias gc='git checkout'
 alias gp='git commit -am "." && git push'
 alias gd='git diff origin/master'
 
