@@ -198,6 +198,7 @@
 
     au FileWritePost,BufWritePost *.less :call LessCSSCompress()
     au BufNewFile,BufRead *.less set filetype=less
+    au BufNewFile,BufRead Fastfile set filetype=ruby
     
     " Mapping file extensions to known types
     au BufRead,BufNewFile *.*proj       setfiletype xml
