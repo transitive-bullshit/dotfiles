@@ -82,7 +82,9 @@
     autocmd FileType javascript,html,css,less set tabstop=2 shiftwidth=2 softtabstop=2
 
     " for eko projects, use weird non-standard settings...
-    autocmd BufNewFile,BufRead ~/dev/eko/* setlocal tabstop=4 shiftwidth=4 softtabstop=4 noexpandtab
+    "autocmd BufNewFile,BufRead ~/dev/eko/api/* setlocal tabstop=4 shiftwidth=4 softtabstop=4 noexpandtab
+    "autocmd BufNewFile,BufRead ~/dev/eko/api/* setlocal tabstop=4 shiftwidth=4 softtabstop=4 noexpandtab
+    autocmd FileType jade setlocal autoindent noexpandtab
 
     set sm                      " show matching parenthesis
     set ai sm
@@ -409,6 +411,22 @@
                 \ 'fallback': 'find %s -type f'
             \ }
         endif
+
+        " CtrlP auto cache clearing.
+        " ----------------------------------------------------------------------------
+        function! SetupCtrlP()
+            if exists("g:loaded_ctrlp") && g:loaded_ctrlp
+                augroup CtrlPExtension
+                autocmd!
+                autocmd FocusGained  * CtrlPClearCache
+                "autocmd BufWritePost * CtrlPClearCache
+                augroup END
+            endif
+        endfunction
+
+        if has("autocmd")
+            autocmd VimEnter * :call SetupCtrlP()
+        endif
     "}
     
     " PythonMode {
@@ -544,7 +562,7 @@
 
         let g:syntastic_always_populate_loc_list = 1
         let g:syntastic_auto_loc_list = 0
-        let g:syntastic_check_on_open = 0
+        let g:syntastic_check_on_open = 1
         let g:syntastic_check_on_wq = 0
         let g:syntastic_javascript_checkers = ['eslint']
     " }

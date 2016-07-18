@@ -1,21 +1,30 @@
 {
   "parser": "babel-eslint",
+  "extends": [
+    "standard",
+    "standard-react"
+  ],
   "env": {
     "browser": true,
-    "node": true
-  },
-  "settings": {
-    "ecmascript": 6,
-    "jsx": true
+    "node": true,
+    "mocha": true,
+    "es6": true
   },
   "plugins": [
     "react"
   ],
-  "rules": {
-    "strict": 0,
-    "quotes": 0,
-    "no-unused-vars": 1,
-    "camelcase": 1,
-    "no-underscore-dangle": 0
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "settings": {
+    "import/resolver": {
+      "webpack": {
+        "config": "./internals/webpack/webpack.dev.babel.js"
+      }
+    }
   }
 }

@@ -23,8 +23,10 @@ npm install -g node-inspector
 npm install -g typescript
 npm install -g tldr
 
-# for working with esversion 6
-npm install -g eslint babel-eslint eslint-plugin-react
+# for working with esversion 6 and react
+npm install -g eslint
+npm install -g babel-eslint
+npm install -g eslint-config-standard eslint-config-standard-react eslint-config-standard-jsx eslint-plugin-react
 
 # install some of the most common node dependencies globally just in case i'm 
 # on a remote island without internet getting attacked by zombies with lasers 
