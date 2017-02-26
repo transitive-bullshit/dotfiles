@@ -11,6 +11,7 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 npm update
 
 # install useful command-line tools
+npm install -g tldr
 npm install -g gulp
 npm install -g bower
 npm install -g standard
@@ -18,14 +19,14 @@ npm install -g less
 npm install -g tape
 npm install -g castnow
 npm install -g spoof
-npm install -g jshint
 npm install -g node-inspector
 npm install -g typescript
-npm install -g tldr
 
 # for working with esversion 6 and react
 npm install -g eslint
 npm install -g babel-eslint
+
+npm install -g jshint
 npm install -g eslint-config-standard eslint-config-standard-react eslint-config-standard-jsx eslint-plugin-react
 
 # install some of the most common node dependencies globally just in case i'm 

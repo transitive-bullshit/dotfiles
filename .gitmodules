@@ -48,3 +48,6 @@
 	path = .vim/bundle/vim-pug
 	url = git://github.com/digitaltoad/vim-pug.git
 	branch = master
+[submodule ".vim/bundle/Dockerfile"]
+	path = .vim/bundle/Dockerfile
+	url = https://github.com/ekalinin/Dockerfile.vim.git

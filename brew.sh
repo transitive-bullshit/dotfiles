@@ -79,6 +79,9 @@ brew install homebrew/dupes/screen
 #brew install xpdf
 #brew install xz
 
+# Better node package manager
+brew install yarn
+
 # Install other useful binaries.
 brew install ack
 brew install ffmpeg

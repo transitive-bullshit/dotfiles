@@ -1,5 +1,12 @@
 # Add '~/dev/bin' and `~/bin` to the `$PATH`
 export PATH="$HOME/dev/bin:$HOME/bin:$PATH";
+export PATH="$PATH:$HOME/.yarn/bin";
+
+# setup GO dependencies
+export GOROOT=/usr/local/opt/go/libexec;
+export GOPATH="$HOME/dev/go";
+export PATH=$PATH:$GOPATH/bin;
+export PATH=$PATH:$GOROOT/bin;
 
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
@@ -49,6 +56,10 @@ complete -W "NSGlobalDomain" defaults;
 
 git config --global user.name "Travis Fischer";
 git config --global user.email fisch0920@gmail.com;
+
+export AWS_REGION='ap-southeast-1'
+export AWS_ACCESS_KEY_ID='AKIAJCRIBA4I57BN5QWA'
+export AWS_SECRET_ACCESS_KEY='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'
 
 if [ -f `brew --prefix`/etc/bash_completion ]; then
     source `brew --prefix`/etc/bash_completion
