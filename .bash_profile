@@ -1,4 +1,3 @@
-# Add `~/bin` to the `$PATH`
 export PATH="$HOME/dev/bin:$HOME/bin:$PATH";
 export PATH="$PATH:$HOME/.yarn/bin";
 
@@ -49,10 +48,9 @@ complete -W "NSGlobalDomain" defaults;
 #complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal Twitter" killall;
 
 # setup GO dependencies
-export GOROOT=/usr/local/opt/go/libexec;
-export GOPATH="$HOME/dev/go";
+#export PATH="$PATH:/usr/local/opt/go/libexec/bin";
+export GOPATH=/usr/local/opt/go;
 export PATH=$PATH:$GOPATH/bin;
-export PATH=$PATH:$GOROOT/bin;
 
 git config --global user.name "Travis Fischer";
 git config --global user.email fisch0920@gmail.com;
@@ -66,3 +64,13 @@ if [ -f ~/.git-completion.bash ]; then
 fi
 
 [ -f "$HOME/.nvm/nvm.sh" ] && source "$HOME/.nvm/nvm.sh";
+
+export GCLOUD_PROJECT='boosty-170514';
+export GOOGLE_APPLICATION_CREDENTIALS="$HOME/dev/keys/master.json";
+export FFMPEG_PATH="/Users/tfischer/dev/temp/ffmpeg/ffmpeg";
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/tfischer/google-cloud-sdk/path.bash.inc' ]; then source '/Users/tfischer/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/tfischer/google-cloud-sdk/completion.bash.inc' ]; then source '/Users/tfischer/google-cloud-sdk/completion.bash.inc'; fi

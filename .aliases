@@ -160,11 +160,17 @@ alias h='heroku'
 alias hc='heroku config'
 alias hcp='heroku config:pull --overwrite && cat .env'
 
-alias gs='git s'
+alias gs='git s' # status
+alias gd='git d' # diff
+alias gl='git l' # log
 alias gc='git commit -am "."'
 alias gp='git commit -am "." && git push'
 alias gpu='git push -u origin `git name-rev --name-only HEAD`'
-alias gd='git diff origin/master'
+alias gpuf='git push -u origin `git name-rev --name-only HEAD` --force-with-lease'
+alias gpf='git push --force-with-lease'
+alias gra='git rebase --abort'
+alias grc='git rebase --continue'
+alias gdb='git branch -d'
 
 alias kc='ps -e | grep "python.*crawler" | grep -v grep | sed "s/^ *\([0-9]*\).*/\1/" | xargs kill -9'
 #alias kx='kill $(ps aux | grep \'Xcode\' | awk \'{print $2}\')'

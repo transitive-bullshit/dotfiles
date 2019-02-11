@@ -1,56 +1,44 @@
 #!/usr/bin/env bash
 
-# Install global command-line tools using npm.
+# https://github.com/creationix/nvm
 
-# Ask for the administrator password upfront.
-sudo -v
+# working with npm
+npm install -g yarn
+npm install -g npx
+npm install -g np
+npm install -g npm-name-cli
 
-# Keep-alive: update existing `sudo` time stamp until the script has finished.
-while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
-
-# install useful command-line tools
-npm install -g tldr
-npm install -g gulp
-npm install -g bower
-npm install -g standard
-npm install -g less
-npm install -g tape
-npm install -g castnow
-npm install -g spoof
+# debugging
+npm install -g ndb
 npm install -g node-inspector
-npm install -g typescript
 
-# for working with esversion 6 and react
+# general utilities
+npm install -g tldr
+npm install -g now
+npm install -g spoof
+npm install -g fkill-cli
+npm install -g castnow
+npm install -g github-is-starred-cli
+npm install -g vtop
+
+# react
+npm install -g create-react-app
+npm install -g create-react-library
+npm install -g react-native-cli
+
+# linting
 npm install -g eslint
 npm install -g babel-eslint
+npm install -g eslint-config-standard
+npm install -g eslint-config-standard-react
+npm install -g eslint-config-standard-jsx
+npm install -g eslint-plugin-react
+npm install -g eslint-config-prettier
+npm install -g eslint-plugin-prettier
+npm install -g prettier
+npm install -g standard
+npm install -g typescript
 
-npm install -g eslint-config-standard eslint-config-standard-react eslint-config-standard-jsx eslint-plugin-react
-npm install -g jshint
-
-# install some of the most common node dependencies globally just in case i'm 
-# on a remote island without internet getting attacked by zombies with lasers 
-# and need to hack some codez to save the dayz
-npm install -g cordova ionic
-npm install -g request
-npm install -g async
-npm install -g cheerio
-npm install -g express
-npm install -g browserify
-npm install -g underscore
-npm install -g mongodb
-npm install -g mongoose
-npm install -g redis
-npm install -g chalk
-npm install -g colors
-npm install -g q
-npm install -g bcrypt
-npm install -g glob
-npm install -g http-server
-npm install -g phantomjs
-npm install -g rimraf
-npm install -g inherits
-npm install -g extends
-npm install -g moment
-npm install -g debug
-npm install -g once
-npm install -g dotenv
+# rarely used nowadays, but still useful to have
+npm install -g gulp
+npm install -g less
