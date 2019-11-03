@@ -123,7 +123,8 @@
     set mousehide               " Hide the mouse cursor while typing
 
     " fix unclosed paren indents, switch indents, and public/private indents
-    set cinoptions+=:1s,l1,g1s,h1s,(0,u0,W1s
+    " NOTE: this appears to cause annoying issues with javascript file indenting
+    "set cinoptions+=:1s,l1,g1s,h1s,(0,u0,W1s
 
     set history=1000            " Store a ton of history (default is 20)
     set shortmess+=filmnrxoOtT  " Abbrev. of messages (avoids 'hit enter')
@@ -593,6 +594,8 @@
         let g:syntastic_check_on_wq = 0
         let g:syntastic_javascript_checkers = ['eslint']
         let g:jsx_ext_required = 0 " Allow jsx in normal js files
+
+        let g:syntastic_python_checkers = ['python3']
     " }
 " }
 
