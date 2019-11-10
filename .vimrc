@@ -217,14 +217,16 @@
 " }
 
 " FileTypes {
-    au FileType C,H,c,cc,cpp,h,pde,java,pl,cs,m set formatoptions=croql cindent
-    au FileType py  set tabstop=4 shiftwidth=4 softtabstop=4
+    au FileType C,H,c,cc,cpp,h,pde,java,pl,cs,m setlocal formatoptions=croql cindent
+    au FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4
     au FileType pde,cs,m,h  set tabstop=4 shiftwidth=4 softtabstop=4
+    au BufWritePre *.py execute ':Black'
 
     " Automatically enable GLSL syntax highlighting
     au BufNewFile,BufRead *.frag,*.vert,*.fp,*.vp,*.glsl setf glsl
-    ":au! FileType python setl nosmartindent
-    au BufRead *.py inoremap # X<c-h>#
+
+    au FileType python set tabstop=4 shiftwidth=4 softtabstop=4
+    " au BufRead *.py inoremap # X<c-h>#
 
     au FileWritePost,BufWritePost *.less :call LessCSSCompress()
     au BufNewFile,BufRead *.less set filetype=less
@@ -340,6 +342,13 @@
 " }
 
 " Plugin Customizations {
+    " prettier {
+        let g:prettier#quickfix_enabled = 0
+        let g:prettier#autoformat = 0
+
+        au BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html Prettier
+    " }
+
     " Misc {
         let g:NERDShutUp=1
         let b:match_ignorecase = 1
