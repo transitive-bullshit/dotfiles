@@ -1,5 +1,13 @@
+export PATH="/usr/local/sbin:$PATH";
 export PATH="$HOME/dev/bin:$HOME/bin:$PATH";
-export PATH="$PATH:$HOME/.yarn/bin";
+export PATH="$PATH:$HOME/.cargo/bin";
+export PATH="/usr/local/opt/python/libexec/bin:$PATH";
+export PATH="$PATH:`python -m site --user-base`/bin";
+
+# TODO: this shouldn't be necessary
+export NODE_PATH=$NODE_PATH:`npm root -g`;
+
+export BASH_SILENCE_DEPRECATION_WARNING=1
 
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
@@ -38,7 +46,7 @@ shopt -s cdspell;
 #fi;
 
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
-[ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh;
+#[ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh;
 
 # Add tab completion for `defaults read|write NSGlobalDomain`
 # You could just use `-g` instead, but I like being explicit
@@ -65,12 +73,23 @@ fi
 
 [ -f "$HOME/.nvm/nvm.sh" ] && source "$HOME/.nvm/nvm.sh";
 
-export GCLOUD_PROJECT='boosty-170514';
-export GOOGLE_APPLICATION_CREDENTIALS="$HOME/dev/keys/master.json";
-export FFMPEG_PATH="/Users/tfischer/dev/temp/ffmpeg/ffmpeg";
+# Always default to the latest available node version on a shell
+nvm alias default node
+
+# Automagical
+#export GCLOUD_PROJECT='boosty-170514';
+#export GOOGLE_APPLICATION_CREDENTIALS="$HOME/dev/keys/master.json";
+# custom-built ffmpeg for ffmpeg-gl-transition (deprecated)
+#export FFMPEG_PATH="/Users/tfischer/dev/temp/ffmpeg/ffmpeg";
+
+# Saasify
+export GCLOUD_PROJECT='saasify';
+export GOOGLE_APPLICATION_CREDENTIALS="$HOME/dev/keys/saasify-2.json";
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/tfischer/google-cloud-sdk/path.bash.inc' ]; then source '/Users/tfischer/google-cloud-sdk/path.bash.inc'; fi
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/tfischer/google-cloud-sdk/completion.bash.inc' ]; then source '/Users/tfischer/google-cloud-sdk/completion.bash.inc'; fi
+
+export PATH="$HOME/.cargo/bin:$PATH"
