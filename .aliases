@@ -39,7 +39,7 @@ alias ls="command ls ${colorflag}"
 
 # Always enable colored `grep` output
 # Note: `GREP_OPTIONS="--color=auto"` is deprecated, hence the alias usage.
-alias grep='grep --color=auto'
+alias grep='grep --color=auto --exclude-dir=node_modules'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
@@ -176,3 +176,9 @@ alias kc='ps -e | grep "python.*crawler" | grep -v grep | sed "s/^ *\([0-9]*\).*
 #alias kx='kill $(ps aux | grep \'Xcode\' | awk \'{print $2}\')'
 
 alias password='date +%s | sha256sum | base64 | head -c 32 ; echo'
+
+alias count-lines='fd "\.(js|ts|json|md|css|html)$" | xargs wc -l | sort'
+
+alias saasify='/Users/tfischer/dev/saasify/saasify/packages/saasify-cli/index.js'
+
+alias pip='pip3'

@@ -346,7 +346,7 @@
         let g:prettier#quickfix_enabled = 0
         let g:prettier#autoformat = 0
 
-        au BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html Prettier
+        au BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.vue,*.yaml,*.html Prettier
     " }
 
     " Misc {
@@ -381,6 +381,8 @@
         let NERDTreeMouseMode=2
         let NERDTreeShowHidden=1
         let NERDTreeKeepTreeInNewTab=1
+        let NERDTreeHijackNetrw=1
+        let NERDTreeUseTCD=1
         let g:nerdtree_tabs_open_on_gui_startup=0
     " }
 
