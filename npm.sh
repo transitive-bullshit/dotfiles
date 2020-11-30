@@ -3,8 +3,6 @@
 # https://github.com/creationix/nvm
 
 # working with npm
-npm install -g yarn
-npm install -g npx
 npm install -g np
 npm install -g npm-name-cli
 
@@ -13,7 +11,6 @@ npm install -g ndb
 npm install -g node-inspector
 
 # general utilities
-npm install -g tldr
 npm install -g now
 npm install -g spoof
 npm install -g fkill-cli
