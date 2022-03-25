@@ -3,6 +3,7 @@ export PATH="$HOME/dev/bin:$HOME/bin:$PATH";
 export PATH="$PATH:$HOME/.cargo/bin";
 export PATH="/usr/local/opt/python/libexec/bin:$PATH";
 export PATH="$PATH:`python -m site --user-base`/bin";
+export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin/psql";
 
 # TODO: this shouldn't be necessary
 export NODE_PATH=$NODE_PATH:`npm root -g`;
@@ -71,10 +72,11 @@ if [ -f ~/.git-completion.bash ]; then
     source ~/.git-completion.bash;
 fi
 
+# https://github.com/nvm-sh/nvm
+export NVM_DIR=$HOME/.nvm
+source $(brew --prefix nvm)/nvm.sh
 [ -f "$HOME/.nvm/nvm.sh" ] && source "$HOME/.nvm/nvm.sh";
-
-# Always default to the latest available node version on a shell
-nvm alias default node
+nvm use default
 
 # Automagical
 #export GCLOUD_PROJECT='boosty-170514';
@@ -83,8 +85,8 @@ nvm alias default node
 #export FFMPEG_PATH="/Users/tfischer/dev/temp/ffmpeg/ffmpeg";
 
 # Saasify
-export GCLOUD_PROJECT='saasify';
-export GOOGLE_APPLICATION_CREDENTIALS="$HOME/dev/keys/saasify-2.json";
+#export GCLOUD_PROJECT='saasify';
+#export GOOGLE_APPLICATION_CREDENTIALS="$HOME/dev/keys/saasify-2.json";
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/tfischer/google-cloud-sdk/path.bash.inc' ]; then source '/Users/tfischer/google-cloud-sdk/path.bash.inc'; fi
@@ -93,3 +95,12 @@ if [ -f '/Users/tfischer/google-cloud-sdk/path.bash.inc' ]; then source '/Users/
 if [ -f '/Users/tfischer/google-cloud-sdk/completion.bash.inc' ]; then source '/Users/tfischer/google-cloud-sdk/completion.bash.inc'; fi
 
 export PATH="$HOME/.cargo/bin:$PATH"
+
+#### FIG ENV VARIABLES ####
+[ -s ~/.fig/exports/env.sh ] && source ~/.fig/exports/env.sh 
+#### END FIG ENV VARIABLES ####
+
+# Wasmer
+export WASMER_DIR="/Users/tfischer/.wasmer"
+[ -s "$WASMER_DIR/wasmer.sh" ] && source "$WASMER_DIR/wasmer.sh"
+

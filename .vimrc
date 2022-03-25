@@ -69,6 +69,7 @@
         "Plug 'hail2u/vim-css3-syntax'
         "Plug 'elzr/vim-json'
         "Plug 'fatih/vim-go'
+        "Plug 'tomlion/vim-solidity'
 
         " template support
         "Plug 'mxw/vim-jsx'
