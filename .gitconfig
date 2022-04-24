@@ -194,3 +194,12 @@
 [url "git://gist.github.com/"]
 
 	insteadOf = "gist:"
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+
+# Override master as the default branch
+[init]
+	defaultBranch = main
