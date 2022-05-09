@@ -1,12 +1,10 @@
 export PATH="/usr/local/sbin:$PATH";
 export PATH="$HOME/dev/bin:$HOME/bin:$PATH";
 export PATH="$PATH:$HOME/.cargo/bin";
-export PATH="/usr/local/opt/python/libexec/bin:$PATH";
-export PATH="$PATH:`python -m site --user-base`/bin";
-export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin/psql";
 
-# TODO: this shouldn't be necessary
-export NODE_PATH=$NODE_PATH:`npm root -g`;
+#export PATH="/usr/local/opt/python/libexec/bin:$PATH";
+#export PATH="$PATH:`python -m site --user-base`/bin";
+#export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin/psql";
 
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
@@ -73,10 +71,12 @@ if [ -f ~/.git-completion.bash ]; then
 fi
 
 # https://github.com/nvm-sh/nvm
-export NVM_DIR=$HOME/.nvm
-source $(brew --prefix nvm)/nvm.sh
-[ -f "$HOME/.nvm/nvm.sh" ] && source "$HOME/.nvm/nvm.sh";
-nvm use default
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+#nvm use default
+
+# TODO: this shouldn't be necessary
+#export NODE_PATH=$NODE_PATH:`npm root -g`;
 
 # Automagical
 #export GCLOUD_PROJECT='boosty-170514';
