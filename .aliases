@@ -171,6 +171,7 @@ alias gpf='git push --force-with-lease'
 alias gra='git rebase --abort'
 alias grc='git rebase --continue'
 alias gdb='git branch -d'
+alias gch='git checkout'
 
 alias kc='ps -e | grep "python.*crawler" | grep -v grep | sed "s/^ *\([0-9]*\).*/\1/" | xargs kill -9'
 #alias kx='kill $(ps aux | grep \'Xcode\' | awk \'{print $2}\')'
@@ -181,4 +182,5 @@ alias count-lines='fd "\.(js|ts|json|md|css|html)$" | xargs wc -l | sort'
 
 alias saasify='/Users/tfischer/dev/saasify/saasify/packages/saasify-cli/index.js'
 
+alias python='python3'
 alias pip='pip3'
