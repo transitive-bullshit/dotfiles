@@ -3,7 +3,7 @@
 	url = https://github.com/Shougo/neocomplcache.vim.git
 [submodule ".vim/bundle/nerdtree"]
 	path = .vim/bundle/nerdtree
-	url = https://github.com/scrooloose/nerdtree.git
+  url = git@github.com:preservim/nerdtree.git
 [submodule ".vim/bundle/syntastic"]
 	path = .vim/bundle/syntastic
 	url = https://github.com/scrooloose/syntastic.git
@@ -53,4 +53,4 @@
 	url = https://github.com/ekalinin/Dockerfile.vim.git
 [submodule ".vim/bundle/vim-prettier"]
 	path = .vim/bundle/vim-prettier
-	url = https://github.com/prettier/vim-prettier.git
+	url = git@github.com:prettier/vim-prettier.git
