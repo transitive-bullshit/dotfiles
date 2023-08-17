@@ -56,5 +56,5 @@ set_colors
 PS1="\[\033[G$BOLD\]\$(parse_git_branch)\[$WHITE\]\$([[ -n \$(git branch 2> /dev/null) ]] && echo \"\[$RESET\] in \")\[$BOLD\]\[$ORANGE\]\w\[$WHITE\] \$ \[$RESET\]"
 export PS1;
 
-PS2="\[${yellow}\]→ \[${reset}\]";
+PS2="\[${YELLOW}\]→ \[${RESET}\]";
 export PS2;

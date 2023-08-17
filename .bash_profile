@@ -1,6 +1,8 @@
 export PATH="/usr/local/sbin:$PATH";
 export PATH="$HOME/dev/bin:$HOME/bin:$PATH";
 export PATH="$PATH:$HOME/.cargo/bin";
+export PATH="$PATH:$HOME/.local/bin";
+export PATH="$PATH:/usr/local/opt/llvm/bin";
 
 #export PATH="/usr/local/opt/python/libexec/bin:$PATH";
 #export PATH="$PATH:`python -m site --user-base`/bin";
@@ -54,7 +56,7 @@ complete -W "NSGlobalDomain" defaults;
 # Add `killall` tab completion for common apps
 #complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal Twitter" killall;
 
-# setup GO dependencies
+# GO
 #export PATH="$PATH:/usr/local/opt/go/libexec/bin";
 export GOPATH=/usr/local/opt/go;
 export PATH=$PATH:$GOPATH/bin;
@@ -88,19 +90,22 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 #export GCLOUD_PROJECT='saasify';
 #export GOOGLE_APPLICATION_CREDENTIALS="$HOME/dev/keys/saasify-2.json";
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/tfischer/google-cloud-sdk/path.bash.inc' ]; then source '/Users/tfischer/google-cloud-sdk/path.bash.inc'; fi
 
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/tfischer/google-cloud-sdk/completion.bash.inc' ]; then source '/Users/tfischer/google-cloud-sdk/completion.bash.inc'; fi
-
-export PATH="$HOME/.cargo/bin:$PATH"
-
-#### FIG ENV VARIABLES ####
 [ -s ~/.fig/exports/env.sh ] && source ~/.fig/exports/env.sh 
-#### END FIG ENV VARIABLES ####
 
 # Wasmer
-export WASMER_DIR="/Users/tfischer/.wasmer"
-[ -s "$WASMER_DIR/wasmer.sh" ] && source "$WASMER_DIR/wasmer.sh"
+#export WASMER_DIR="/Users/tfischer/.wasmer"
+#[ -s "$WASMER_DIR/wasmer.sh" ] && source "$WASMER_DIR/wasmer.sh"
 
+# Rust
+. "$HOME/.cargo/env"
+
+source ~/.bash_prompt
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/tfischer/Downloads/google-cloud-sdk/path.bash.inc' ]; then . '/Users/tfischer/Downloads/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/tfischer/Downloads/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/tfischer/Downloads/google-cloud-sdk/completion.bash.inc'; fi
+
+export PATH="/Users/tfischer/Library/Application Support/edgedb/bin:$PATH"

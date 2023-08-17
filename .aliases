@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+shopt -s expand_aliases
+
 # Easier navigation: .., ..., ...., ....., ~ and -
 alias ..='cd ..;ls'
 alias ...='cd ../..;ls'
