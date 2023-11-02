@@ -197,3 +197,25 @@ function o() {
 function tre() {
 	tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
 }
+
+# Map `p` to the nearest package manager (pnpm, yarn, npm, bun)
+function p() {
+  local current_dir=$(pwd)
+  while [[ "$current_dir" != "" && "$current_dir" != "/" ]]; do
+    if [[ -f "$current_dir/bun.lockb" ]]; then
+      command bun "$@"
+      return
+    elif [[ -f "$current_dir/pnpm-lock.yaml" ]]; then
+      command pnpm "$@"
+      return
+    elif [[ -f "$current_dir/yarn.lock" ]]; then
+      command yarn "$@"
+      return
+    elif [[ -f "$current_dir/package-lock.json" ]]; then
+      command npm "$@"
+      return
+    fi
+    current_dir=$(dirname "$current_dir")
+  done
+  command npm "$@"
+}

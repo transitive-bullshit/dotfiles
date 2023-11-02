@@ -48,10 +48,6 @@ brew install git-lfs
 brew install imagemagick
 brew install lua
 brew install tree
-
-# transitive-bullshit
-#brew install sshrc
-brew install yarn
 brew install httpie
 
 # Remove outdated versions from the cellar.
