@@ -1,8 +1,10 @@
 export PATH="/usr/local/sbin:$PATH";
+export PATH="/opt/homebrew/bin:$PATH";
 export PATH="$HOME/dev/bin:$HOME/bin:$PATH";
 export PATH="$PATH:$HOME/.cargo/bin";
 export PATH="$PATH:$HOME/.local/bin";
 export PATH="$PATH:/usr/local/opt/llvm/bin";
+export PATH="$PATH:/Applications/MacVim.app/Contents/bin";
 
 #export PATH="/usr/local/opt/python/libexec/bin:$PATH";
 #export PATH="$PATH:`python -m site --user-base`/bin";
@@ -98,7 +100,7 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 #[ -s "$WASMER_DIR/wasmer.sh" ] && source "$WASMER_DIR/wasmer.sh"
 
 # Rust
-. "$HOME/.cargo/env"
+#. "$HOME/.cargo/env"
 
 source ~/.bash_prompt
 
@@ -108,4 +110,4 @@ if [ -f '/Users/tfischer/Downloads/google-cloud-sdk/path.bash.inc' ]; then . '/U
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/tfischer/Downloads/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/tfischer/Downloads/google-cloud-sdk/completion.bash.inc'; fi
 
-export PATH="/Users/tfischer/Library/Application Support/edgedb/bin:$PATH"
+#export PATH="/Users/tfischer/Library/Application Support/edgedb/bin:$PATH"

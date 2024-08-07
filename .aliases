@@ -186,3 +186,4 @@ alias saasify='/Users/tfischer/dev/saasify/saasify/packages/saasify-cli/index.js
 
 alias python='python3'
 alias pip='pip3'
+alias p='pnpm'
