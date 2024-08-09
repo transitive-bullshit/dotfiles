@@ -217,5 +217,5 @@ function p() {
     fi
     current_dir=$(dirname "$current_dir")
   done
-  command npm "$@"
+  command pnpm "$@"
 }
