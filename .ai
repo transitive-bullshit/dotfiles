@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+export LLM_MODEL=gpt-4.1

@@ -15,7 +15,7 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
-for file in ~/.{path,bash_prompt,exports,aliases,functions,extra}; do
+for file in ~/.{path,bash_prompt,exports,aliases,functions,extra,ai}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
@@ -111,3 +111,11 @@ if [ -f '/Users/tfischer/Downloads/google-cloud-sdk/path.bash.inc' ]; then . '/U
 if [ -f '/Users/tfischer/Downloads/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/tfischer/Downloads/google-cloud-sdk/completion.bash.inc'; fi
 
 #export PATH="/Users/tfischer/Library/Application Support/edgedb/bin:$PATH"
+
+# https://scipy.github.io/devdocs/building/index.html#system-level-dependencies
+export PKG_CONFIG_PATH="/opt/homebrew/opt/openblas/lib/pkgconfig"
+
+export PATH="/opt/homebrew/sbin:$PATH"
+
+# Added by Windsurf
+export PATH="/Users/tfischer/.codeium/windsurf/bin:$PATH"
