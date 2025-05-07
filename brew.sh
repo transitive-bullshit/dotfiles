@@ -30,17 +30,14 @@ if ! fgrep -q '/usr/local/bin/bash' /etc/shells; then
   chsh -s /usr/local/bin/bash;
 fi;
 
-# Install `wget` with IRI support.
-brew install wget
-
-# Install GnuPG to enable PGP-signing commits.
-brew install gnupg
-
 # Install more recent versions of some macOS tools.
 brew install vim
 brew install grep
 brew install openssh
 brew install screen
+brew install wget
+brew install gnupg
+brew install imagemagick
 
 # Install other useful binaries.
 brew install git
@@ -49,6 +46,21 @@ brew install imagemagick
 brew install lua
 brew install tree
 brew install httpie
+brew install jq
+brew install gh
+brew install ripgrep
+brew install llm
+brew install rust
+
+# JS/TS
+brew install nvm
+brew install bun
+
+# https://github.com/jordanbaird/Ice
+brew install jordanbaird-ice
+
+brew install ffmpeg
+brew install google-cloud-sdk
 
 # Remove outdated versions from the cellar.
 brew cleanup
