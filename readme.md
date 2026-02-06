@@ -54,3 +54,15 @@ Using `nvm`:
 ```bash
 ./npm.sh
 ```
+
+### Environment variables
+
+```bash
+cp -f ~/.env.example ~/.env
+```
+
+These env variables will be sourced by the shell initialization script, but the values aren't committed to git, so you'll need to fill in any relevant values manually.
+
+## License
+
+MIT © [Travis Fischer](https://x.com/transitive_bs)
