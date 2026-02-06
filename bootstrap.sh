@@ -12,8 +12,8 @@ function doIt() {
 		--exclude "bootstrap.sh" \
 		--exclude "npm.sh" \
 		--exclude "brew.sh" \
-		--exclude "README.md" \
-		--exclude "LICENSE-MIT.txt" \
+		--exclude "readme.md" \
+		--exclude "license" \
 		--exclude "nvm-default-packages" \
 		-avh --no-perms . ~;
 	source ~/.bash_profile;
