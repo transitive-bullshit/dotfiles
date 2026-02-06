@@ -2,7 +2,7 @@
 
 cd "$(dirname "${BASH_SOURCE}")";
 
-git pull origin master;
+#git pull origin master;
 
 function doIt() {
 	rsync --exclude ".git/" \
@@ -14,6 +14,7 @@ function doIt() {
 		--exclude "brew.sh" \
 		--exclude "README.md" \
 		--exclude "LICENSE-MIT.txt" \
+		--exclude "nvm-default-packages" \
 		-avh --no-perms . ~;
 	source ~/.bash_profile;
 }

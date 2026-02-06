@@ -1,0 +1,13 @@
+# general
+pnpm
+tsx
+yarn
+spoof
+fkill-cli
+commit-emoji
+
+# ai
+bird-dm
+openclaw
+@anthropic-ai/claude-code
+@openai/codex
