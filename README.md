@@ -49,7 +49,7 @@ Using [Homebrew](http://brew.sh/):
 ./brew.sh
 ```
 
-### Global NPM packages
+### Install Global NPM packages
 
 Using `nvm`:
 
