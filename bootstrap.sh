@@ -14,7 +14,7 @@ function doIt() {
 		--exclude "brew.sh" \
 		--exclude "readme.md" \
 		--exclude "license" \
-		--exclude "nvm-default-packages" \
+		--exclude "npm-default-packages" \
 		-avh --no-perms . ~;
 	source ~/.bash_profile;
 }

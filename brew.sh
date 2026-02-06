@@ -75,8 +75,9 @@ brew install steipete/tap/gifgrep
 brew install steipete/tap/gogcli
 brew install steipete/tap/goplaces
 brew install steipete/tap/summarize
-brew install tw93/tap/mole
 
+# Larger tools
+brew install tw93/tap/mole
 brew install ffmpeg
 
 # Remove outdated versions from the cellar
