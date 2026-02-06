@@ -42,17 +42,17 @@ brew install imagemagick
 # Install other useful binaries
 brew install git
 brew install git-lfs
-brew install lua
 brew install tree
+brew install lua
+brew install rust
 brew install httpie
 brew install jq
 brew install gh
 brew install ripgrep
-brew install llm
-brew install rust
 brew install fzf
-brew install yt-dlp
 brew install zoxide
+brew install mole
+brew install yt-dlp
 
 # JS/TS
 brew install nvm
@@ -67,17 +67,17 @@ brew install jordanbaird-ice
 
 # Third-party SDKs
 brew install google-cloud-sdk
-brew install stripe/stripe-cli/stripe
+brew install stripe-cli
 
 # AI-oriented cli tools
+brew install llm
 brew install steipete/tap/bird
 brew install steipete/tap/gifgrep
 brew install steipete/tap/gogcli
 brew install steipete/tap/goplaces
 brew install steipete/tap/summarize
 
-# Larger tools
-brew install tw93/tap/mole
+# FFmpeg
 brew install ffmpeg
 
 # Remove outdated versions from the cellar
