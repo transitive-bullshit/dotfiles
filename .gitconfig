@@ -148,6 +148,7 @@
 
 	# Detect copies as well as renames
 	renames = copies
+	algorithm = histogram
 
 [diff "bin"]
 
@@ -169,9 +170,11 @@
 	# Use the Git 1.x.x default to avoid errors on machines with old Git
 	# installations. To use `simple` instead, add this to your `~/.extra` file:
 	# `git config --global push.default simple`. See http://git.io/mMah-w.
-	default = matching
+	default = simple
 	# Make `git push` push relevant annotated tags when pushing branches out.
 	followTags = true
+  # set up remote branch if it doesn't exist
+	allowSetupRemote = true
 
 # URL shorthands
 
@@ -205,3 +208,13 @@
 	defaultBranch = main
 [url "https://github.com/"]
 	insteadOf = git://github.com/
+[column]
+	ui = auto
+[branch]
+	sort = -committerdate
+[tag]
+	sort = version:refname
+[fetch]
+	prune = true
+	pruneTags = true
+	all = true
