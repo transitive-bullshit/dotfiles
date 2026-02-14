@@ -1,0 +1,71 @@
+# GNU core utilities (those that come with macOS are outdated)
+# Don’t forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`
+coreutils
+
+# Some other useful utilities like `sponge`
+moreutils
+
+# GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed
+findutils
+
+# GNU `sed`, overwriting the built-in `sed`
+gnu-sed
+
+# Bash 4
+# Note: don’t forget to add `/usr/local/bin/bash` to `/etc/shells` before
+# running `chsh`
+bash
+bash-completion2
+
+# More recent versions of some macOS tools
+git
+git-lfs
+tree
+vim
+grep
+openssh
+screen
+wget
+gnupg
+imagemagick
+
+# Other useful tools
+lua
+rust
+httpie
+jq
+gh
+ripgrep
+fzf
+zoxide
+mole
+yt-dlp
+
+# JS/TS
+nvm
+bun
+
+# Python
+python
+uv
+pipx
+poetry
+scipy
+
+# https://github.com/jordanbaird/Ice
+jordanbaird-ice
+
+# Third-party SDKs
+google-cloud-sdk
+stripe-cli
+
+# AI-oriented CLI tools
+llm
+steipete/tap/bird
+steipete/tap/gifgrep
+steipete/tap/gogcli
+steipete/tap/goplaces
+steipete/tap/summarize
+
+# FFmpeg
+ffmpeg

@@ -1,5 +1,6 @@
 export PATH="/usr/local/sbin:$PATH";
 export PATH="/opt/homebrew/bin:$PATH";
+export PATH="/opt/homebrew/sbin:$PATH"
 export PATH="$HOME/dev/bin:$HOME/bin:$PATH";
 export PATH="$PATH:$HOME/.cargo/bin";
 export PATH="$PATH:$HOME/.local/bin";
@@ -7,16 +8,12 @@ export PATH="$PATH:/usr/local/opt/llvm/bin";
 export PATH="$PATH:/Applications/MacVim.app/Contents/bin";
 export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin";
 export PATH="$PATH:/Applications/Ghostty.app/Contents/MacOS";
+export PATH="/usr/local/opt/python/libexec/bin:$PATH";
 
 export BASH_SILENCE_DEPRECATION_WARNING=1
-
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 eval $(locale)
-
-#export PATH="/usr/local/opt/python/libexec/bin:$PATH";
-#export PATH="$PATH:`python -m site --user-base`/bin";
-#export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin/psql";
 
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
@@ -35,19 +32,8 @@ shopt -s histappend;
 # Autocorrect typos in path names when using `cd`
 shopt -s cdspell;
 
-# Enable some Bash 4 features when possible:
-# * `autocd`, e.g. `**/qux` will enter `./foo/bar/baz/qux`
-# * Recursive globbing, e.g. `echo **/*.txt`
-#for option in autocd globstar; do
-#	shopt -s "$option" 2> /dev/null;
-#done;
-
-# Add tab completion for many Bash commands
-#if which brew &> /dev/null && [ -f "$(brew --prefix)/share/bash-completion/bash_completion" ]; then
-#	source "$(brew --prefix)/share/bash-completion/bash_completion";
-#elif [ -f /etc/bash_completion ]; then
-#	source /etc/bash_completion;
-#fi;
+#export PATH="$PATH:`python -m site --user-base`/bin";
+#export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin/psql";
 
 # Enable tab completion for `g` by marking it as an alias for `git`
 #if type _git &> /dev/null && [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
@@ -61,10 +47,7 @@ shopt -s cdspell;
 # You could just use `-g` instead, but I like being explicit
 complete -W "NSGlobalDomain" defaults;
 
-# Add `killall` tab completion for common apps
-#complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal Twitter" killall;
-
-# GO
+# Go
 #export PATH="$PATH:/usr/local/opt/go/libexec/bin";
 export GOPATH=/usr/local/opt/go;
 export PATH=$PATH:$GOPATH/bin;
@@ -89,22 +72,7 @@ export NVM_DIR="$HOME/.nvm"
 # TODO: this shouldn't be necessary
 #export NODE_PATH=$NODE_PATH:`npm root -g`;
 
-# Automagical
-#export GCLOUD_PROJECT='boosty-170514';
-#export GOOGLE_APPLICATION_CREDENTIALS="$HOME/dev/keys/master.json";
-# custom-built ffmpeg for ffmpeg-gl-transition (deprecated)
-#export FFMPEG_PATH="/Users/tfischer/dev/temp/ffmpeg/ffmpeg";
-
-# Saasify
-#export GCLOUD_PROJECT='saasify';
-#export GOOGLE_APPLICATION_CREDENTIALS="$HOME/dev/keys/saasify-2.json";
-
-
 [ -s ~/.fig/exports/env.sh ] && source ~/.fig/exports/env.sh 
-
-# Wasmer
-#export WASMER_DIR="/Users/tfischer/.wasmer"
-#[ -s "$WASMER_DIR/wasmer.sh" ] && source "$WASMER_DIR/wasmer.sh"
 
 # Rust
 #. "$HOME/.cargo/env"
@@ -123,12 +91,8 @@ if [ -f '/Users/tfischer/Downloads/google-cloud-sdk/path.bash.inc' ]; then . '/U
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/tfischer/Downloads/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/tfischer/Downloads/google-cloud-sdk/completion.bash.inc'; fi
 
-#export PATH="/Users/tfischer/Library/Application Support/edgedb/bin:$PATH"
-
 # https://scipy.github.io/devdocs/building/index.html#system-level-dependencies
 export PKG_CONFIG_PATH="/opt/homebrew/opt/openblas/lib/pkgconfig"
-
-export PATH="/opt/homebrew/sbin:$PATH"
 
 # Added by Windsurf
 export PATH="/Users/tfischer/.codeium/windsurf/bin:$PATH"
@@ -145,8 +109,7 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 # agentic
 #export AGENTIC_API_BASE_URL="http://localhost:3001"
-alias a='AGENTIC_API_BASE_URL="http://localhost:3001" tsx /Users/tfischer/dev/modules/agentic/packages/cli/src/cli.ts'
+#alias a='AGENTIC_API_BASE_URL="http://localhost:3001" tsx /Users/tfischer/dev/modules/agentic/packages/cli/src/cli.ts'
 
 # openclaw
 eval "$(openclaw completion --shell bash)"
-#source <(openclaw completion --shell bash)
