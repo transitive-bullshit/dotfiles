@@ -39,6 +39,7 @@ ripgrep
 fzf
 zoxide
 mole
+sqlite
 yt-dlp
 
 # JS/TS
