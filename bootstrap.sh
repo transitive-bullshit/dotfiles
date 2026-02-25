@@ -2,20 +2,56 @@
 
 cd "$(dirname "${BASH_SOURCE}")";
 
-#git pull origin master;
-
 function doIt() {
-	rsync --exclude ".git/" \
-		--exclude ".DS_Store" \
-		--exclude ".osx" \
-		--exclude ".macos" \
-		--exclude "bootstrap.sh" \
-		--exclude "npm.sh" \
-		--exclude "brew.sh" \
-		--exclude "readme.md" \
-		--exclude "license" \
-		--exclude "npm-default-packages" \
-		-avh --no-perms . ~;
+	local DOTFILES_DIR
+	DOTFILES_DIR="$(pwd)"
+
+	local EXCLUDES=(
+		".git"
+		".gitignore"
+		".env"
+		".DS_Store"
+		"bootstrap.sh"
+		"macos.sh"
+		"npm.sh"
+		"brew.sh"
+		"license"
+		"npm-default-packages"
+		"brew-default-packages"
+		"CLAUDE.md"
+		"AGENTS.md"
+		"readme.md"
+	)
+
+	for item in "$DOTFILES_DIR"/.[^.]* "$DOTFILES_DIR"/*; do
+		[ -e "$item" ] || continue
+
+		local name
+		name="$(basename "$item")"
+
+		local skip=false
+		for exclude in "${EXCLUDES[@]}"; do
+			if [[ "$name" == "$exclude" ]]; then
+				skip=true
+				break
+			fi
+		done
+		$skip && continue
+
+		local target="$HOME/$name"
+
+		if [ -L "$target" ]; then
+			rm -f "$target"
+			# echo "rm -f $target"
+		elif [ -e "$target" ]; then
+			rm -rf "$target"
+			# echo "rm -rf $target"
+		fi
+
+		ln -s "$item" "$target"
+		# echo "Linked $name -> $item"
+	done
+
 	source ~/.bash_profile;
 }
 

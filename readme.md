@@ -2,7 +2,7 @@
 
 ## NOTES
 
-This is my customized version of *Mathias Bynens*' excellent MacOS bootstrap setup. Aside from some simple settings tweaks, it adds extensive Vim customization via Pathogen and a modified version of the [spf13](https://github.com/spf13/spf13-vim) Vim distribution. All pathogen plugins are submodules and must be initialized properly before running the `bootstrap` script.
+This is my customized version of _Mathias Bynens_' excellent macOS bootstrap setup. Aside from some simple settings tweaks, it adds extensive Vim customization via Pathogen and a modified version of the [spf13](https://github.com/spf13/spf13-vim) Vim distribution. All pathogen plugins are submodules and must be initialized properly before running the `bootstrap` script.
 
 ## Installation
 
@@ -31,12 +31,12 @@ Alternatively, to update while avoiding the confirmation prompt:
 set -- -f; source bootstrap.sh
 ```
 
-### Sensible OS X defaults
+### Sensible macOS defaults
 
-When setting up a new Mac, you may want to set some sensible OS X defaults:
+When setting up a new Mac, you may want to set some sensible defaults:
 
 ```bash
-./.macos
+./macos.sh
 ```
 
 ### Install Homebrew formulae
