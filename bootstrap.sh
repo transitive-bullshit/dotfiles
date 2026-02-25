@@ -42,14 +42,11 @@ function doIt() {
 
 		if [ -L "$target" ]; then
 			rm -f "$target"
-			# echo "rm -f $target"
 		elif [ -e "$target" ]; then
 			rm -rf "$target"
-			# echo "rm -rf $target"
 		fi
 
 		ln -s "$item" "$target"
-		# echo "Linked $name -> $item"
 	done
 
 	source ~/.bash_profile;
