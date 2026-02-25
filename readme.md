@@ -1,9 +1,5 @@
 # transitive-bullshit dotfiles
 
-## NOTES
-
-This is my customized version of _Mathias Bynens_' excellent macOS bootstrap setup. Aside from some simple settings tweaks, it adds extensive Vim customization via Pathogen and a modified version of the [spf13](https://github.com/spf13/spf13-vim) Vim distribution. All pathogen plugins are submodules and must be initialized properly before running the `bootstrap` script.
-
 ## Installation
 
 ### Using Git and the bootstrap script
@@ -11,7 +7,7 @@ This is my customized version of _Mathias Bynens_' excellent macOS bootstrap set
 You can clone the repo wherever you want.
 
 ```bash
-git clone https://github.com/fisch0920/dotfiles.git
+git clone https://github.com/transitive-bullshit/dotfiles.git
 cd dotfiles
 git submodule init
 git submodule update
@@ -21,14 +17,13 @@ source bootstrap.sh
 To update, `cd` into your local `dotfiles` repo and then:
 
 ```bash
-git submodule update
-source bootstrap.sh
+./bootstrap.sh
 ```
 
 Alternatively, to update while avoiding the confirmation prompt:
 
 ```bash
-set -- -f; source bootstrap.sh
+set -- -f; ./bootstrap.sh
 ```
 
 ### Sensible macOS defaults
