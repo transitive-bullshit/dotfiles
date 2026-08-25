@@ -30,17 +30,17 @@ gnupg
 imagemagick
 
 # Other useful tools
-lua
-rust
-httpie
+zoxide
+fzf
 jq
 gh
 ripgrep
-fzf
-zoxide
-mole
+httpie
 sqlite
 yt-dlp
+mole
+lua
+rust
 
 # JS/TS
 nvm
@@ -53,20 +53,9 @@ pipx
 poetry
 scipy
 
-# https://github.com/jordanbaird/Ice
-jordanbaird-ice
-
 # Third-party SDKs
 google-cloud-sdk
 stripe-cli
-
-# AI-oriented CLI tools
-llm
-steipete/tap/bird
-steipete/tap/gifgrep
-steipete/tap/gogcli
-steipete/tap/goplaces
-steipete/tap/summarize
 
 # FFmpeg
 ffmpeg

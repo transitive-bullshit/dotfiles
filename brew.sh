@@ -6,15 +6,73 @@ brew update
 # Upgrade any already-installed formulae
 brew upgrade
 
-# Install all default Homebrew packages
-while read -r package; do
-  brew install "$package"
-done < <(grep -Ev '^(#|$)' brew-default-packages)
+# GNU core utilities (those that come with macOS are outdated)
+# Don’t forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`
+brew install coreutils
+
+# Some other useful utilities like `sponge`
+brew install moreutils
+
+# GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed
+brew install findutils
+
+# GNU `sed`, overwriting the built-in `sed`
+brew install gnu-sed
+
+# Bash 4
+# Note: don’t forget to add `/usr/local/bin/bash` to `/etc/shells` before
+# running `chsh`
+brew install bash
+brew install bash-completion2
+
+# More recent versions of some macOS tools
+brew install git
+brew install git-lfs
+brew install grep
+brew install tree
+brew install vim
+brew install openssh
+brew install screen
+brew install wget
+brew install gnupg
+brew install imagemagick
+
+# Other useful tools
+brew install zoxide
+brew install fzf
+brew install jq
+brew install gh
+brew install ripgrep
+brew install httpie
+brew install sqlite
+brew install yt-dlp
+brew install mole
+brew install lua
+brew install rust
+
+# JS/TS
+brew install nvm
+brew install bun
+
+# Python
+brew install python
+brew install uv
+brew install pipx
+brew install poetry
+brew install scipy
+
+# Third-party SDKs
+brew install google-cloud-sdk
+brew install stripe-cli
+
+# FFmpeg
+brew install ffmpeg
+
 
 # Switch to using brew-installed bash as the default shell
-if ! fgrep -q '/usr/local/bin/bash' /etc/shells; then
-  echo '/usr/local/bin/bash' | sudo tee -a /etc/shells;
-  chsh -s /usr/local/bin/bash;
+if ! fgrep -q '/opt/homebrew/bin/bash' /etc/shells; then
+  echo '/opt/homebrew/bin/bash' | sudo tee -a /etc/shells;
+  chsh -s /opt/homebrew/bin/bash;
 fi;
 
 # Remove outdated versions from the cellar

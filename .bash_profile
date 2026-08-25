@@ -72,16 +72,16 @@ export NVM_DIR="$HOME/.nvm"
 # TODO: this shouldn't be necessary
 #export NODE_PATH=$NODE_PATH:`npm root -g`;
 
-[ -s ~/.fig/exports/env.sh ] && source ~/.fig/exports/env.sh 
+[ -s ~/.fig/exports/env.sh ] && source ~/.fig/exports/env.sh
 
 # Rust
 #. "$HOME/.cargo/env"
 
-# https://github.com/junegunn/fzf
-eval "$(fzf --bash)"
-
 # https://github.com/ajeetdsouza/zoxide
 eval "$(zoxide init bash)"
+
+# https://github.com/junegunn/fzf
+eval "$(fzf --bash)"
 
 source ~/.bash_prompt
 

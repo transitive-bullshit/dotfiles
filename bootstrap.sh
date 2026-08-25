@@ -18,6 +18,7 @@ function doIt() {
 		"license"
 		"npm-default-packages"
 		"brew-default-packages"
+    "ghostty-config"
 		"CLAUDE.md"
 		"AGENTS.md"
 		"readme.md"
