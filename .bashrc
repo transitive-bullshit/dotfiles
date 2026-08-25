@@ -11,3 +11,6 @@ export NVM_DIR="$HOME/.nvm"
 export PNPM_HOME="/Users/tfischer/Library/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 # pnpm end
+
+# OpenClaw Completion
+#source "/Users/tfischer/.openclaw/completions/openclaw.bash"

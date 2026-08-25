@@ -112,4 +112,5 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 #alias a='AGENTIC_API_BASE_URL="http://localhost:3001" tsx /Users/tfischer/dev/modules/agentic/packages/cli/src/cli.ts'
 
 # openclaw
-eval "$(openclaw completion --shell bash)"
+#eval "$(openclaw completion --shell bash)"
+
