@@ -1,0 +1,24 @@
+#theme = dark:Builtin Dark,light:Builtin Light
+#theme = light:GitHub Light High Contrast,dark:GitHub Dark High Contrast
+theme = light:Raycast Light,dark:Raycast Dark
+#theme = light:Catppuccin Latte,dark:Catppuccin Mocha
+
+#background-opacity = 0.97
+#background-blur-radius = 10
+#unfocused-split-opacity = 0.25
+
+font-size = 12
+
+window-padding-x = 7
+window-padding-y = 7
+window-padding-balance = true
+
+adjust-cursor-thickness = 2
+adjust-underline-thickness = 1
+adjust-cursor-height = 20
+cursor-style = block
+cursor-style-blink = false
+shell-integration-features = no-cursor
+
+keybind = cmd+shift+left=previous_tab
+keybind = cmd+shift+right=next_tab
