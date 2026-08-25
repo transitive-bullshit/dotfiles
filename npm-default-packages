@@ -1,7 +1,6 @@
 # general
 pnpm
 tsx
-yarn
 spoof
 fkill-cli
 commit-emoji

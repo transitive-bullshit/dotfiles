@@ -65,6 +65,9 @@ brew install scipy
 brew install google-cloud-sdk
 brew install stripe-cli
 
+## AI
+brew install --cask codex
+
 # FFmpeg
 brew install ffmpeg
 
