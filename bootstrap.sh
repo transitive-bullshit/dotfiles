@@ -18,6 +18,7 @@ function doIt() {
 		"license"
 		"npm-default-packages"
     "ghostty-config"
+    "vscode-settings.json"
 		"CLAUDE.md"
 		"AGENTS.md"
 		"readme.md"

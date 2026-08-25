@@ -1,0 +1,126 @@
+{
+  "editor.suggestSelection": "first",
+  "editor.gotoLocation.multipleDefinitions": "goto",
+  "editor.gotoLocation.multipleImplementations": "goto",
+  "js/ts.implicitProjectConfig.experimentalDecorators": true,
+  "vim.hlsearch": true,
+  "vim.useSystemClipboard": true,
+  "explorer.confirmDragAndDrop": false,
+  "editor.minimap.enabled": false,
+  "explorer.confirmDelete": false,
+  "editor.tabSize": 2,
+  "js/ts.updateImportsOnFileMove.enabled": "always",
+  "files.exclude": {
+    "**/.next": true,
+    "**/.now": true,
+    "**/.vercel": true,
+    "**/node_modules": true
+  },
+  "terminal.integrated.scrollback": 10000,
+  "keyboard.touchbar.enabled": false,
+
+  // useful for taking code screenshots
+  // "editor.folding": false,
+  // "editor.guides.indentation": false,
+  // "editor.guides.highlightActiveIndentation": false,
+  // "editor.lineNumbers": "off",
+
+  "editor.formatOnSave": false,
+  "editor.formatOnSaveMode": "file",
+  "editor.defaultFormatter": "oxc.oxc-vscode",
+  // "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.format.oxc": "always", // run formatter first
+    "source.fixAll.oxc": "always" // run lint fixes after
+  },
+
+  "editor.inlineSuggest.enabled": true,
+  "editor.autoClosingBrackets": "never",
+  "editor.autoClosingQuotes": "never",
+  "[javascript]": {
+    // "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": "oxc.oxc-vscode",
+    "editor.autoClosingBrackets": "never",
+    "editor.autoClosingQuotes": "never"
+  },
+  "[typescript]": {
+    "editor.autoClosingBrackets": "never",
+    "editor.autoClosingQuotes": "never"
+  },
+  "[prisma]": {
+    "editor.defaultFormatter": "Prisma.prisma"
+  },
+  "github.copilot.enable": {
+    "*": true,
+    "yaml": false,
+    "plaintext": false,
+    "markdown": true,
+    "typescript": true,
+    "typescriptreact": true
+  },
+  "security.workspace.trust.untrustedFiles": "open",
+  "editor.unicodeHighlight.ambiguousCharacters": false,
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  "editor.wordWrap": "on",
+  "vim.normalModeKeyBindingsNonRecursive": [
+    // FIX https://github.com/VSCodeVim/Vim/issues/8157#issuecomment-1426704638
+    // Wait for new release, else we should migrate to using vscode-neovim extension
+    { "before": ["u"], "commands": ["undo"] },
+    { "before": ["c-r"], "commands": ["redo"] }
+  ],
+  "[python]": {
+    "editor.formatOnType": true,
+    "editor.tabSize": 4
+  },
+  "python.analysis.extraPaths": ["${workspaceFolder}"],
+  "python.formatting.provider": "black",
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": true,
+  "python.languageServer": "Pylance",
+  "python.analysis.typeCheckingMode": "basic",
+  "terminal.integrated.env.osx": {
+    "FIG_NEW_SESSION": "1"
+  },
+  "editor.accessibilitySupport": "off",
+  "redhat.telemetry.enabled": false,
+  "js/ts.preferGoToSourceDefinition": true,
+  "terminal.integrated.altClickMovesCursor": false,
+  "editor.multiCursorModifier": "alt",
+  "editor.gotoLocation.multipleTypeDefinitions": "goto",
+  "editor.gotoLocation.alternativeDeclarationCommand": "editor.action.goToTypeDefinition",
+  "editor.gotoLocation.alternativeImplementationCommand": "editor.action.goToTypeDefinition",
+  "editor.gotoLocation.alternativeReferenceCommand": "editor.action.goToTypeDefinition",
+  "editor.gotoLocation.alternativeTypeDefinitionCommand": "editor.action.goToTypeDefinition",
+  "editor.gotoLocation.alternativeDefinitionCommand": "editor.action.goToTypeDefinition",
+  "yaml.disableSchemaDetection": [
+    "**/docker-compose.yml",
+    "**/docker-compose.yaml",
+    "**/docker-compose.*.yml",
+    "**/docker-compose.*.yaml",
+    "**/compose.yml",
+    "**/compose.yaml",
+    "**/compose.*.yml",
+    "**/compose.*.yaml",
+    "**/.github/workflows/*.yml",
+    "**/.github/workflows/*.yaml",
+    "**/.gitea/workflows/*.yml",
+    "**/.gitea/workflows/*.yaml",
+    "**/.forgejo/workflows/*.yml",
+    "**/.forgejo/workflows/*.yaml"
+  ],
+  "json.schemaDownload.trustedDomains": {
+    "https://developer.microsoft.com/json-schemas/": true,
+    "https://json-schema.org/": true,
+    "https://json.schemastore.org/": true,
+    "https://raw.githubusercontent.com/devcontainers/spec/": true,
+    "https://raw.githubusercontent.com/microsoft/vscode/": true,
+    "https://schemastore.azurewebsites.net/": true,
+    "https://turborepo.dev/schema.json": true,
+    "https://www.schemastore.org/": true
+  },
+  "workbench.colorTheme": "Dark Modern",
+  "tailwindCSS.lint.suggestCanonicalClasses": "ignore",
+  "editor.unicodeHighlight.nonBasicASCII": false
+}
