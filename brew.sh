@@ -49,6 +49,7 @@ brew install yt-dlp
 brew install mole
 brew install lua
 brew install rust
+brew install macvim
 
 # JS/TS
 brew install nvm
@@ -61,16 +62,11 @@ brew install pipx
 brew install poetry
 brew install scipy
 
-# Third-party SDKs
-brew install google-cloud-sdk
-brew install stripe-cli
-
 ## AI
 brew install --cask codex
 
 # FFmpeg
 brew install ffmpeg
-
 
 # Switch to using brew-installed bash as the default shell
 if ! fgrep -q '/opt/homebrew/bin/bash' /etc/shells; then
