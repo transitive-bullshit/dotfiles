@@ -30,7 +30,7 @@ brew install git
 brew install git-lfs
 brew install grep
 brew install tree
-brew install vim
+#brew install vim # replaced by macvim-app down below
 brew install openssh
 brew install screen
 brew install wget
@@ -49,7 +49,7 @@ brew install yt-dlp
 brew install mole
 brew install lua
 brew install rust
-brew install macvim
+brew install --cask macvim-app # comes with application
 
 # JS/TS
 brew install nvm
