@@ -68,6 +68,9 @@ brew install --cask codex
 # FFmpeg
 brew install ffmpeg
 
+brew install steipete/tap/birdclaw
+brew install --cask xdevplatform/tap/xurl
+
 # Switch to using brew-installed bash as the default shell
 if ! fgrep -q '/opt/homebrew/bin/bash' /etc/shells; then
   echo '/opt/homebrew/bin/bash' | sudo tee -a /etc/shells;
