@@ -1,5 +1,18 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
+with_archive=false
+with_social=false
+for option in "$@"; do
+  case "$option" in
+    --with-archive) with_archive=true ;;
+    --with-social) with_social=true ;;
+    --help|-h) echo "Usage: ./brew.sh [--with-archive] [--with-social]"; exit 0 ;;
+    *) echo "Unknown option: $option" >&2; exit 1 ;;
+  esac
+done
+
 # Make sure we’re using the latest Homebrew
 brew update
 
@@ -68,14 +81,19 @@ brew install --cask codex
 # FFmpeg
 brew install ffmpeg
 
-brew install steipete/tap/birdclaw
-brew install --cask xdevplatform/tap/xurl
+if "$with_archive"; then
+  brew install steipete/tap/birdclaw
+fi
+if "$with_social"; then
+  brew install --cask xdevplatform/tap/xurl
+fi
 
 # Switch to using brew-installed bash as the default shell
-if ! fgrep -q '/opt/homebrew/bin/bash' /etc/shells; then
-  echo '/opt/homebrew/bin/bash' | sudo tee -a /etc/shells;
-  chsh -s /opt/homebrew/bin/bash;
-fi;
+brew_bash="$(brew --prefix)/bin/bash"
+if ! grep -Fq "$brew_bash" /etc/shells; then
+  echo "$brew_bash" | sudo tee -a /etc/shells
+  chsh -s "$brew_bash"
+fi
 
 # Remove outdated versions from the cellar
 brew cleanup
