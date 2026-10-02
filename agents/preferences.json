@@ -1,0 +1,22 @@
+{
+  "claude": {
+    "switchModelsOnFlag": false,
+    "theme": "light",
+    "tui": "fullscreen"
+  },
+  "codex": {
+    "model": "gpt-6-astra",
+    "model_reasoning_effort": "medium",
+    "personality": "pragmatic",
+    "service_tier": "default",
+    "tui.animations": false,
+    "tui.show_tooltips": false,
+    "tui.status_line": [
+      "model-with-reasoning",
+      "project-name",
+      "git-branch",
+      "context-used"
+    ],
+    "tui.status_line_use_colors": true
+  }
+}

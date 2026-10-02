@@ -17,3 +17,7 @@ Thumbs.db
 .Trashes
 
 .env
+
+# Local installer state and Python caches
+__pycache__/
+*.pyc

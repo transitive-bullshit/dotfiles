@@ -1,0 +1,20 @@
+{
+  "note": "Optional integrations are provisioned and authenticated per machine. Their application-managed caches and credentials are not copied.",
+  "capabilities": {
+    "desktop": [
+      "An authenticated browser for Midjourney"
+    ],
+    "personal": [
+      "Notion connection for personal-notion-projects",
+      "Authenticated Vercel CLI v53+ for vercel-optimize"
+    ],
+    "social": [
+      "Postiz account credentials",
+      "X authentication for xurl"
+    ],
+    "archive": [
+      "Birdclaw archive initialized separately",
+      "Birdclaw authentication and sync schedule configured separately"
+    ]
+  }
+}

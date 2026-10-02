@@ -1,0 +1,30 @@
+name: Test
+
+on: [push, pull_request, workflow_dispatch]
+
+permissions:
+  contents: read
+
+jobs:
+  environment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          path: dotfiles
+          persist-credentials: false
+      - name: Read tested skills revision
+        id: skills
+        run: echo "ref=$(cat dotfiles/agents/skills-revision)" >> "$GITHUB_OUTPUT"
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: transitive-bullshit/skills
+          ref: ${{ steps.skills.outputs.ref }}
+          path: skills
+          persist-credentials: false
+      - run: python3 -m unittest discover -s tests -v
+        working-directory: dotfiles
+      - run: scripts/agent-env check
+        working-directory: dotfiles
+      - run: bash -n bootstrap.sh brew.sh npm.sh scripts/agent-env scripts/cloud-setup.sh
+        working-directory: dotfiles

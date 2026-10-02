@@ -1,0 +1,18 @@
+{
+  "mac": {
+    "skills": "mac",
+    "agents": ["codex", "claude"],
+    "commands": ["git", "python3", "node", "codex", "claude"]
+  },
+  "cloud": {
+    "skills": "cloud",
+    "agents": ["codex"],
+    "settings": false,
+    "commands": ["git", "python3"]
+  },
+  "current": {
+    "skills": "current",
+    "agents": ["codex", "claude"],
+    "commands": ["git", "python3", "node", "codex", "claude"]
+  }
+}
