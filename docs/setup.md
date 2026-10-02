@@ -15,7 +15,7 @@ The installer links `agent-env` into `~/.local/bin`; the shell setup adds that d
 
 ## Everyday use
 
-Edit linked skills/instructions or `agents/preferences.json`, then commit and push normally. On another machine, run `scripts/agent-env pull`; it preflights both repos, fast-forwards clean branches, restores pinned submodules, applies the installed profile, and checks it. Dirty/diverged checkouts require normal Git resolution first. It never commits, stashes, resets, or pushes.
+Edit linked skills/instructions or `agents/preferences.json`, then commit and push normally. On another machine, run `scripts/agent-env pull`; it preflights both repos, fast-forwards clean branches, updates initialized submodules to their pins, applies the installed profile, and checks it. Agent-only setups do not initialize Vim submodules. Dirty/diverged checkouts require normal Git resolution first. It never commits, stashes, resets, or pushes.
 
 Changes made through an app's settings UI can be reviewed with `scripts/agent-env export-config` and captured with `--write`. Only allowlisted portable fields are exported. `apply` preserves unrelated config and refuses to silently overwrite app-setting changes since its last receipt.
 

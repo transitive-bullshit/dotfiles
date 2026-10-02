@@ -272,7 +272,7 @@ def pull(repositories, dry_run=False):
         git(repo, 'merge', '--ff-only', '@{upstream}', capture=False)
         if (repo / '.gitmodules').is_file():
             git(repo, 'submodule', 'sync', '--recursive', capture=False)
-            git(repo, 'submodule', 'update', '--init', '--recursive', capture=False)
+            git(repo, 'submodule', 'update', '--recursive', capture=False)
 
 
 def main():

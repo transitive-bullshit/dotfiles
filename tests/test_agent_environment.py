@@ -182,6 +182,16 @@ class GitSyncTests(unittest.TestCase):
         self.assertEqual(git(self.repos[0], 'rev-parse', 'HEAD'), before)
         self.assertEqual((self.repos[1] / 'file.txt').read_text(), 'local changes\n')
 
+    def test_agent_only_pull_does_not_initialize_editor_submodules(self):
+        writer = self.writers[0]
+        (writer / '.gitmodules').write_text('[submodule "editor"]\n\tpath = .vim/bundle/editor\n\turl = ' + str(self.root / 'unavailable.git') + '\n')
+        git(writer, 'add', '.gitmodules')
+        git(writer, 'update-index', '--add', '--cacheinfo', '160000', git(writer, 'rev-parse', 'HEAD'), '.vim/bundle/editor')
+        git(writer, 'commit', '-m', 'Optional editor submodule')
+        git(writer, 'push')
+        self.module.pull(self.repos)
+        self.assertFalse((self.repos[0] / '.vim/bundle/editor/.git').exists())
+
     def test_diverged_second_checkout_prevents_first_update(self):
         for index in range(2):
             self.advance(index)
