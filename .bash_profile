@@ -32,6 +32,8 @@ shopt -s histappend;
 # Autocorrect typos in path names when using `cd`
 shopt -s cdspell;
 
+ulimit -Sn 4096;
+
 #export PATH="$PATH:`python -m site --user-base`/bin";
 #export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin/psql";
 
