@@ -60,6 +60,7 @@ Thumbs.db
 .Spotlight-V100
 .Trashes
 
+# media safety net (use git add -f for a deliberate exception)
 *.mp4
 *.mov
 *.webm
