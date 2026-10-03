@@ -80,6 +80,8 @@ export NVM_DIR="$HOME/.nvm"
 #. "$HOME/.cargo/env"
 
 # https://github.com/ajeetdsouza/zoxide
+# Silence the doctor warning, which non-interactive agent shells print on every command
+export _ZO_DOCTOR=0
 eval "$(zoxide init bash)"
 
 # https://github.com/junegunn/fzf
