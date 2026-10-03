@@ -12,8 +12,12 @@ alias ...='cd ../..;ls'
 alias ....='cd ../../..;ls'
 
 # Color only when writing to a terminal, so pipes stay plain
-export LSCOLORS='BxBxhxDxfxhxhxhxhxcxcx'
-alias ls='ls -G'
+if ls --version > /dev/null 2>&1; then # GNU `ls`
+	alias ls='ls --color=auto'
+else # macOS `ls`
+	export LSCOLORS='BxBxhxDxfxhxhxhxhxcxcx'
+	alias ls='ls -G'
+fi
 alias grep='grep --color=auto --exclude-dir=node_modules'
 
 # Enable aliases to be sudo’ed
