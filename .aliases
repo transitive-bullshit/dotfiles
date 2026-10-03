@@ -10,6 +10,9 @@ alias cd='z'
 alias ..='cd ..;ls'
 alias ...='cd ../..;ls'
 alias ....='cd ../../..;ls'
+alias .....='cd ../../../..;ls'
+alias ......='cd ../../../../..;ls'
+alias .......='cd ../../../../../..;ls'
 
 # Color only when writing to a terminal, so pipes stay plain
 if ls --version > /dev/null 2>&1; then # GNU `ls`
