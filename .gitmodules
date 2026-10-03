@@ -3,13 +3,13 @@
 	url = https://github.com/Shougo/neocomplcache.vim.git
 [submodule ".vim/bundle/nerdtree"]
 	path = .vim/bundle/nerdtree
-  url = git@github.com:preservim/nerdtree.git
+	url = https://github.com/preservim/nerdtree.git
 [submodule ".vim/bundle/syntastic"]
 	path = .vim/bundle/syntastic
 	url = https://github.com/scrooloose/syntastic.git
 [submodule ".vim/bundle/tabular"]
 	path = .vim/bundle/tabular
-	url = git://github.com/godlygeek/tabular.git
+	url = https://github.com/godlygeek/tabular.git
 [submodule ".vim/bundle/vim-css3-syntax"]
 	path = .vim/bundle/vim-css3-syntax
 	url = https://github.com/hail2u/vim-css3-syntax.git
@@ -46,11 +46,11 @@
 	branch = master
 [submodule ".vim/bundle/vim-pug"]
 	path = .vim/bundle/vim-pug
-	url = git://github.com/digitaltoad/vim-pug.git
+	url = https://github.com/digitaltoad/vim-pug.git
 	branch = master
 [submodule ".vim/bundle/Dockerfile"]
 	path = .vim/bundle/Dockerfile
 	url = https://github.com/ekalinin/Dockerfile.vim.git
 [submodule ".vim/bundle/vim-prettier"]
 	path = .vim/bundle/vim-prettier
-	url = git@github.com:prettier/vim-prettier.git
+	url = https://github.com/prettier/vim-prettier.git

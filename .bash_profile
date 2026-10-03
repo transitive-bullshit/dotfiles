@@ -37,10 +37,10 @@ export NVM_DIR="$HOME/.nvm"
 export PKG_CONFIG_PATH="/opt/homebrew/opt/openblas/lib/pkgconfig"
 
 # Added by Windsurf
-export PATH="/Users/tfischer/.codeium/windsurf/bin:$PATH"
+export PATH="$HOME/.codeium/windsurf/bin:$PATH"
 
 # pnpm
-export PNPM_HOME="/Users/tfischer/Library/pnpm"
+export PNPM_HOME="$HOME/Library/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 # pnpm end
 
