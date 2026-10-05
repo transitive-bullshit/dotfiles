@@ -10,7 +10,7 @@
     ],
     "social": [
       "Postiz account credentials",
-      "X authentication for xurl"
+      "Authenticated bird CLI; optional xurl fallback governed by the x-data skill"
     ],
     "archive": [
       "Birdclaw archive initialized separately",

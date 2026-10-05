@@ -12,3 +12,5 @@ After opening a PR in the Claude desktop app, bind it if needed, then enable Aut
 Keep READMEs extremely concise: a human-facing preview and practical getting-started instructions, preferably a copyable prompt for an agent. Treat code and command help as the source of truth.
 
 For shared skill installation, skill updates, or agent configuration changes, use the Git checkouts recorded in `~/.local/state/agent-env/environment.json`. Read their `AGENTS.md` files, preserve local edits and provenance, and finish with `agent-env doctor`.
+
+For X/Twitter reads in any project, including supplied URLs, profiles, recent posts, or personal history, read `~/.agents/skills/x-data/SKILL.md` and follow its source precedence and freshness rules. That skill is the single source of truth for X data access.
