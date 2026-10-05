@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
 
-# Loaded only in human terminals (see .bash_profile). Kept: aliases used at
-# least 10 times in recent shell history.
+# Loaded only in human terminals (see .bash_profile).
 
-# `cd` through zoxide, which also jumps to frecent directories
+# `cd` through zoxide, which also jumps to recent directories
 alias cd='z'
 
 # Easier navigation
@@ -33,8 +32,8 @@ alias c='claude'
 
 # Git
 alias g='git'
-alias gs='git s' # status
-alias gd='git d' # diff
+alias gs='git status'
+alias gd='git diff'
 alias gca='git commit -am'
 alias gch='git checkout'
 alias grc='git rebase --continue'
