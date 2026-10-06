@@ -53,6 +53,7 @@ brew install imagemagick
 # Other useful tools
 brew install zoxide
 brew install fzf
+brew install fd
 brew install jq
 brew install gh
 brew install ripgrep
