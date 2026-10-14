@@ -20,7 +20,7 @@ REPO = Path(__file__).resolve().parents[1]
 PREFERENCES = REPO / 'agents/preferences.json'
 CONFIGS = {'codex': '.codex/config.toml', 'claude': '.claude/settings.json'}
 ALLOWED = {
-    'codex': {'model': str, 'model_reasoning_effort': str, 'service_tier': str,
+    'codex': {'model': str, 'service_tier': str,
               'personality': str, 'tui.animations': bool, 'tui.show_tooltips': bool,
               'tui.status_line': list, 'tui.status_line_use_colors': bool},
     'claude': {'theme': str, 'tui': str, 'switchModelsOnFlag': bool},

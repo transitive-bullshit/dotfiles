@@ -97,6 +97,38 @@ class EnvironmentTests(unittest.TestCase):
         self.assertEqual(captured['codex']['model'], 'app-model')
         self.cli('apply')
 
+    def test_reasoning_effort_stays_local_with_legacy_receipt(self):
+        self.cli('apply')
+        config = self.home / '.codex/config.toml'
+        managed = config.read_text()
+        self.assertNotIn('model_reasoning_effort', tomllib.loads(managed))
+        receipt = self.home / '.local/state/agent-env/environment.json'
+        legacy = json.loads(receipt.read_text())
+        legacy['preferences']['codex']['model_reasoning_effort'] = 'medium'
+        receipt.write_text(json.dumps(legacy))
+
+        for effort in ['low', 'xhigh']:
+            with self.subTest(effort=effort):
+                raw = f'# Local chat default\nmodel_reasoning_effort = "{effort}"\n' + managed
+                config.write_text(raw)
+                self.assertEqual(tomllib.loads(raw)['model_reasoning_effort'], effort)
+                self.cli('doctor')
+                result = self.cli('export-config', '--write')
+                self.assertNotIn('model_reasoning_effort', result.stdout)
+                captured = json.loads((self.repo / 'agents/preferences.json').read_text())
+                self.assertNotIn('model_reasoning_effort', captured['codex'])
+                self.cli('apply')
+                self.assertEqual(config.read_text(), raw)
+                self.assertNotIn('model_reasoning_effort', json.loads(receipt.read_text())['preferences']['codex'])
+
+    def test_reasoning_effort_cannot_be_added_to_portable_preferences(self):
+        path = self.repo / 'agents/preferences.json'
+        values = json.loads(path.read_text())
+        values['codex']['model_reasoning_effort'] = 'medium'
+        path.write_text(json.dumps(values))
+        self.assertIn('Unsupported portable setting or type: codex.model_reasoning_effort',
+                      self.cli('check', success=False).stderr)
+
     def test_export_never_includes_nonportable_values(self):
         self.cli('apply')
         path = self.home / '.claude/settings.json'

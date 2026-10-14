@@ -32,7 +32,7 @@ alias c='claude'
 
 # Git
 alias g='git'
-alias gs='git status'
+alias gs='git status -s'
 alias gd='git diff'
 alias gca='git commit -am'
 alias gch='git checkout'

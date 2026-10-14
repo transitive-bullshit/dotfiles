@@ -19,6 +19,13 @@ Edit linked skills/instructions or `agents/preferences.json`, then commit and pu
 
 Changes made through an app's settings UI can be reviewed with `scripts/agent-env export-config` and captured with `--write`. Only allowlisted portable fields are exported. `apply` preserves unrelated config and refuses to silently overwrite app-setting changes since its last receipt.
 
+Portable values live in `agents/preferences.json`; `ALLOWED` in `scripts/agent_env.py` defines which fields may be captured and managed:
+
+- Codex: `model`, `service_tier`, `personality`, `tui.animations`, `tui.show_tooltips`, `tui.status_line`, `tui.status_line_use_colors`.
+- Claude: `theme`, `tui`, `switchModelsOnFlag`.
+
+The full live files, `~/.codex/config.toml` and `~/.claude/settings.json`, stay local. Codex `model_reasoning_effort` is a frequently changed chat default and is intentionally excluded from export, apply, and doctor. The cloud profile does not apply desktop preferences.
+
 Installations are recorded under `~/.local/state/agent-env`. To undo an apply, use `scripts/agent-env restore --backup <id>`; later changes block restoration. Use `--target-home <temporary-directory> --skip-tools` for isolated file-layout checks.
 
 Shell installation uses only `dotfiles.json`; new repository files do not become home-directory links automatically. `macos.sh` remains an optional, separately reviewed machine-wide customization.
